@@ -1,4 +1,4 @@
-"use client"; 
+"use client";
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
@@ -13,22 +13,35 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isOpen]);
+
   const navLinks = [
     { name: "Home", href: "#person" },
     { name: "Sobre", href: "#about" },
     { name: "Projetos", href: "#projects" },
     { name: "Recomendações", href: "#testimonials" },
-    { name: "Contatos", href: "#contacts" }
+    { name: "Contatos", href: "#contacts" },
   ];
 
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 ${
-        scrolled ? "bg-black/95 backdrop-blur-md shadow-lg py-3" : "bg-transparent py-5"
+        scrolled
+          ? "bg-black/95 backdrop-blur-md shadow-lg py-3"
+          : "bg-transparent py-5"
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-        
         <Link href="/" className="text-2xl font-bold hover:text-pink z-50">
           <h1>kaiqui.dev</h1>
         </Link>
@@ -54,14 +67,22 @@ export default function Navbar() {
           onClick={() => setIsOpen(!isOpen)}
           aria-label="Abrir Menu"
         >
-          <span className={`block w-full h-0.75 bg-white rounded ${isOpen ? "rotate-45 translate-y-2.5 bg-pink" : ""}`} />
-          <span className={`block w-full h-0.75 bg-white rounded ${isOpen ? "opacity-0" : ""}`} />
-          <span className={`block w-full h-0.75 bg-white rounded ${isOpen ? "-rotate-45 -translate-y-2.5 bg-pink" : ""}`} />
+          <span
+            className={`block w-full h-0.75 bg-white rounded ${isOpen ? "rotate-45 translate-y-2.5 bg-pink" : ""}`}
+          />
+          <span
+            className={`block w-full h-0.75 bg-white rounded ${isOpen ? "opacity-0" : ""}`}
+          />
+          <span
+            className={`block w-full h-0.75 bg-white rounded ${isOpen ? "-rotate-45 -translate-y-2.5 bg-pink" : ""}`}
+          />
         </button>
 
         <div
-          className={`fixed inset-0 bg-black/95 backdrop-blur-xl flex flex-col items-center justify-center gap-8 lg:hidden ${
-            isOpen ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"
+          className={`fixed top-0 left-0 w-full h-dvh bg-black flex flex-col items-center justify-center gap-8 lg:hidden z-40 ${
+            isOpen
+              ? "opacity-100 visible"
+              : "opacity-0 invisible pointer-events-none"
           }`}
         >
           {navLinks.map((item) => (

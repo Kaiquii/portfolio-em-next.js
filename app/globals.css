@@ -7,18 +7,30 @@
   --color-purple: #5f01ac;
   --color-gray: #666;
   --color-light-gray: #f5f5f5;
-  
+
   --font-poppins: 'Poppins', sans-serif;
 }
 
 @keyframes backgroundFloat {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  50% { transform: translateY(-30px) rotate(180deg); }
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-30px) rotate(180deg);
+  }
 }
 
 @keyframes typewriterText {
-  0% { color: transparent; opacity: 0; }
-  100% { color: var(--color-white); opacity: 1; }
+  0% {
+    color: transparent;
+    opacity: 0;
+  }
+
+  100% {
+    color: var(--color-white);
+    opacity: 1;
+  }
 }
 
 html {
@@ -41,7 +53,7 @@ body {
 }
 
 .swiper-pagination-bullet-active {
-  background: linear-gradient(135deg, #d12f7a, #073fcc) !important; /* Pink to Blue */
+  background: linear-gradient(135deg, #d12f7a, #073fcc) !important;
   width: 25px !important;
   border-radius: 5px !important;
 }
@@ -72,11 +84,20 @@ body {
   border: none;
 }
 
-/* Ajuste para as setas não ficarem coladas na borda em mobile */
-.swiper-button-next { right: 10px !important; }
-.swiper-button-prev { left: 10px !important; }
+.swiper-button-next {
+  right: 10px !important;
+}
+
+.swiper-button-prev {
+  left: 10px !important;
+}
 
 @media (min-width: 1024px) {
-  .swiper-button-next { right: -50px !important; } /* Joga pra fora do card em telas grandes */
-  .swiper-button-prev { left: -50px !important; }
+  .swiper-button-next {
+    right: -50px !important;
+  }
+
+  .swiper-button-prev {
+    left: -50px !important;
+  }
 }

@@ -10,7 +10,7 @@ const recommendations = [
     role: "Desenvolvedor de software fullstack",
     company: "C Portal",
     img: "/img/matheus-brito.png",
-    text: "Tive o prazer de trabalhar com o Kaiqui durante o período em que ele atuou como estagiário de Suporte Técnico. Desde o início, ele se destacou pelo interesse genuíno em aprender e se desenvolver...",
+    text: "Tive o prazer de trabalhar com o Kaiqui durante o período em que ele atuou como estagiário de Suporte Técnico. Desde o início, ele se destacou pelo interesse genuíno em aprender e se desenvolver. Sempre demonstrou proatividade, curiosidade técnica e disposição para ajudar os colegas — qualidades que, sem dúvida, farão diferença em sua trajetória profissional. É nítido que ele busca crescer continuamente, absorvendo feedbacks e buscando novas formas de melhorar. Com certeza tem um futuro promissor pela frente!",
     featured: true,
   },
   {
@@ -18,7 +18,23 @@ const recommendations = [
     role: "Especialista de Manufatura | Green Belt",
     company: "Cie Automotive",
     img: "/img/bruno-jardim.jpeg",
-    text: "Tive o prazer de trabalhar com Kaiqui durante três anos na empresa Cie Automotive... Demonstrou um alto nível de inteligência nos controles sistêmicos, proatividade no planejamento...",
+    text: "Tive o prazer de trabalhar com Kaiqui durante três anos na empresa Cie Automotive, onde ele atuou como Aprendiz, estagiário e efetivo. Desde o início demonstrou um alto nível de inteligência nos controles sistêmico, proatividade no planejamento das atividades do departamento e dedicação às suas atividades. Ele foi responsável por implementar diversos KPI's, ajudando na análise dos dados de produtividade e refugo. Profissional extremamente criativo.",
+    featured: false,
+  },
+  {
+    name: "João Mário Silva Nascimento",
+    role: "Engenheiro de Software | Go | Kotlin | NodeJs | NextJs",
+    company: "D&O Sistemas",
+    img: "/img/joao-mario.jpg",
+    text: "Quero deixar aqui minha recomendação pro Kaiqui Lucas. Tive a oportunidade de acompanhar o trabalho dele e posso dizer com tranquilidade que é um profissional com muita disposição pra aprender e que entrega os projetos com excelência e atenção aos detalhes. É o tipo de pessoa que não se contenta em fazer o básico, ele realmente busca entender o porquê das coisas, se aprofunda, melhora a cada dia e tem uma postura super proativa. Sem dúvida, alguém com muito potencial e que faz a diferença em qualquer equipe. Além disso, ele tem uma mentalidade colaborativa incrível. Sempre disposto a ajudar os colegas, compartilhar conhecimento e contribuir pra que o time cresça junto. Trabalhar com alguém assim é fácil, leve e inspirador, e isso faz toda a diferença no dia a dia.",
+    featured: false,
+  },
+  {
+    name: "Leonardo Cali ",
+    role: "Analista de Sistemas | Analista de Infraestrutura | Virtualização de Ambientes",
+    company: "D&O Sistemas",
+    img: "/img/leonardo-calli.jpg",
+    text: "Trabalhar com Kaiqui Lucas é ter a certeza de que a experiência do usuário estará em boas mãos. Ele une técnica e sensibilidade de design de uma forma rara de se encontrar: transforma ideias em interfaces funcionais, leves e com atenção a cada detalhe. Com domínio de React, TypeScript, Tailwind e boas práticas de arquitetura, Kaiqui entrega mais do que código — entrega experiências. É meticuloso com performance, acessibilidade e usabilidade, sempre buscando a melhor forma de comunicar o que está na tela com clareza e propósito. Além disso, tem um espírito de equipe exemplar: está sempre disposto a ajudar, ouvir, revisar e compartilhar conhecimento. Sua forma colaborativa eleva o nível de todos ao redor. Um profissional que entende que design e código caminham juntos — e faz isso com excelência. Qualquer time que conte com o Kaiqui tem muito a ganhar.",
     featured: false,
   },
 ];

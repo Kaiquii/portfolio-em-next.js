@@ -92,7 +92,7 @@ export default function Hero() {
         <div className="relative w-70 h-70 lg:w-100 lg:h-100 rounded-full p-0.75 bg-linear-to-tr from-orange-400 via-pink-500 to-blue-600 animate-[profileGlow_4s_ease-in-out_infinite] mb-8">
           <div className="w-full h-full rounded-full overflow-hidden relative border-4 border-black bg-black">
             <Image
-              src="/img/foto-kaiqui-ofc.jpg"
+              src="/img/foto-kaiqui.jpg"
               alt="Kaiqui Lucas"
               fill
               className="object-cover"
