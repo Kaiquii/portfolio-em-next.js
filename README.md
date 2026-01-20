@@ -42,6 +42,6 @@ Agora vamos instalar as "peças" que compõem o projeto (chamadas de dependênci
    ```bash
    npm install
 4. Como Rodar o Projeto (Atenção aqui!)
-  * Agora vamos ligar o servidor. No mesmo terminal, digite exatamente este comando e aperte Enter:
-  ```bash
-  npm run dev
+    * Agora vamos ligar o servidor. No mesmo terminal, digite exatamente este comando e aperte Enter:
+    ```bash
+    npm run dev
