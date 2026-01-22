@@ -105,7 +105,7 @@ export default function Testimonials() {
 
         <div className="text-center mt-12">
           <Link
-            href="https://www.linkedin.com/in/kaiqui-lucas/"
+            href="https://www.linkedin.com/in/kaiqui-lucas/details/recommendations/?detailScreenTabIndex=0"
             target="_blank"
             className="inline-flex items-center gap-3 px-8 py-3 rounded-full bg-[#0077B5] text-white font-bold hover:shadow-[0_10px_30px_rgba(0,119,181,0.3)] hover:-translate-y-1"
           >

@@ -3,14 +3,17 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import {
-  FaJava,
   FaCode,
   FaUser,
   FaGraduationCap,
   FaBriefcase,
   FaDownload,
+  FaGitAlt,
+  FaGithub,
+  FaDocker,
+  FaNodeJs,
 } from "react-icons/fa";
-import { SiReact, SiNextdotjs, SiTypescript } from "react-icons/si";
+import { SiReact, SiNextdotjs, SiSharp, SiKotlin } from "react-icons/si";
 
 export default function About() {
   const calculateAge = (birthDate: string) => {
@@ -25,6 +28,20 @@ export default function About() {
   };
 
   const age = calculateAge("2002-07-06");
+
+  const techStack = [
+    "HTML5",
+    "CSS3",
+    "TypeScript",
+    "ReactJS",
+    "NextJS",
+    "TailwindCSS",
+    "NodeJS",
+    "Java",
+    "Kotlin",
+    "C#",
+    "Python",
+  ];
 
   return (
     <section
@@ -76,20 +93,20 @@ export default function About() {
                       <span className="text-gray-500 w-6 select-none">3</span>
                       <span className="text-blue-300 ml-6">role:</span>{" "}
                       <span className="text-green-400 ml-2">
-                        &quot;Full Stack Dev&quot;
+                        &quot;Full Stack&quot;
                       </span>
                       <span className="text-white">,</span>
                     </div>
                     <div className="flex">
                       <span className="text-gray-500 w-6 select-none">4</span>
-                      <span className="text-blue-300 ml-6">skills:</span>{" "}
+                      <span className="text-blue-300 ml-6">stack:</span>{" "}
                       <span className="text-yellow-300 ml-2">{"["}</span>
                     </div>
 
                     <div className="flex items-center group/line hover:bg-white/5 py-1 rounded">
                       <span className="text-gray-500 w-6 select-none">5</span>
                       <span className="text-green-400 ml-10">
-                        &quot;React&quot;
+                        &quot;ReactJS&quot;
                       </span>
                       <SiReact className="ml-3 text-cyan-400 text-lg animate-spin-slow" />
                       <span className="text-white">,</span>
@@ -105,25 +122,33 @@ export default function About() {
                     <div className="flex items-center group/line hover:bg-white/5 py-1 rounded">
                       <span className="text-gray-500 w-6 select-none">7</span>
                       <span className="text-green-400 ml-10">
-                        &quot;Java&quot;
+                        &quot;NodeJS&quot;
                       </span>
-                      <FaJava className="ml-3 text-red-500 text-lg" />
+                      <FaNodeJs className="ml-3 text-green-500 text-lg" />
                       <span className="text-white">,</span>
                     </div>
                     <div className="flex items-center group/line hover:bg-white/5 py-1 rounded">
                       <span className="text-gray-500 w-6 select-none">8</span>
                       <span className="text-green-400 ml-10">
-                        &quot;TypeScript&quot;
+                        &quot;C# / .NET&quot;
                       </span>
-                      <SiTypescript className="ml-3 text-blue-500 text-lg" />
+                      <SiSharp className="ml-3 text-violet-500 text-lg" />
+                      <span className="text-white">,</span>
+                    </div>
+                    <div className="flex items-center group/line hover:bg-white/5 py-1 rounded">
+                      <span className="text-gray-500 w-6 select-none">9</span>
+                      <span className="text-green-400 ml-10">
+                        &quot;Kotlin&quot;
+                      </span>
+                      <SiKotlin className="ml-3 text-purple-400 text-lg" />
                     </div>
 
                     <div className="flex">
-                      <span className="text-gray-500 w-6 select-none">9</span>
+                      <span className="text-gray-500 w-6 select-none">10</span>
                       <span className="text-yellow-300 ml-6">{"]"}</span>
                     </div>
                     <div className="flex">
-                      <span className="text-gray-500 w-6 select-none">10</span>
+                      <span className="text-gray-500 w-6 select-none">11</span>
                       <span className="text-yellow-300">{"}"}</span>
                       <span className="text-white">;</span>
                     </div>
@@ -156,31 +181,42 @@ export default function About() {
           <p className="text-base lg:text-lg text-gray-300 mb-8 leading-relaxed">
             Sou um <strong>Desenvolvedor Full Stack</strong> apaixonado por
             tecnologia e inovação, com experiência em diversas tecnologias
-            modernas.
+            modernas para web e software.
           </p>
 
-          <div className="bg-white/5 border border-white/10 rounded-2xl p-6 mb-8 backdrop-blur-sm">
+          <div className="bg-white/5 border border-white/10 rounded-2xl p-6 mb-6 backdrop-blur-sm">
             <span className="block text-pink-500 font-bold text-lg mb-4">
-              Tecnologias:
+              Linguagens & Frameworks:
             </span>
             <div className="flex flex-wrap gap-2">
-              {[
-                "TypeScript",
-                "TailwindCSS",
-                "Python",
-                "PHP",
-                "ReactJS",
-                "NextJS",
-                "UI/UX",
-                "Java",
-              ].map((tag) => (
+              {techStack.map((tag) => (
                 <span
                   key={tag}
-                  className="bg-linear-to-br from-pink-600 to-blue-600 text-white px-3 py-1 rounded-full text-xs lg:text-sm font-medium shadow-md hover:scale-105 cursor-default"
+                  className="bg-linear-to-br from-pink-600/80 to-blue-600/80 border border-white/10 text-white px-3 py-1 rounded-full text-xs lg:text-sm font-medium shadow-md hover:scale-105 hover:bg-pink-600 cursor-default"
                 >
                   {tag}
                 </span>
               ))}
+            </div>
+          </div>
+
+          <div className="mb-8">
+            <span className="block text-blue-400 font-bold text-lg mb-3">
+              Ferramentas & DevOps:
+            </span>
+            <div className="flex flex-wrap gap-4">
+              <div className="flex items-center gap-2 bg-[#1e1e1e] border border-white/10 px-4 py-2 rounded-lg text-gray-300 hover:text-white hover:border-orange-500">
+                <FaGitAlt className="text-orange-500 text-xl" />
+                <span className="font-mono text-sm">GIT</span>
+              </div>
+              <div className="flex items-center gap-2 bg-[#1e1e1e] border border-white/10 px-4 py-2 rounded-lg text-gray-300 hover:text-white hover:border-white">
+                <FaGithub className="text-white text-xl" />
+                <span className="font-mono text-sm">GitHub</span>
+              </div>
+              <div className="flex items-center gap-2 bg-[#1e1e1e] border border-white/10 px-4 py-2 rounded-lg text-gray-300 hover:text-white hover:border-blue-500">
+                <FaDocker className="text-blue-500 text-xl" />
+                <span className="font-mono text-sm">Docker</span>
+              </div>
             </div>
           </div>
 
@@ -205,10 +241,10 @@ export default function About() {
               </div>
               <div>
                 <h4 className="text-white font-bold text-lg group-hover:text-pink-500">
-                  Formação & Experiência
+                  Stack Versátil
                 </h4>
                 <p className="text-gray-400 text-sm">
-                  Conhecimento em NextJS, ReactJS, Python, TypeScript, Java...
+                  Do Front-end (React/Next) ao Back-end (Java/C#/Node).
                 </p>
               </div>
             </div>

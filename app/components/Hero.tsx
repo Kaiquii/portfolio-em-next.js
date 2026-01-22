@@ -4,31 +4,19 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
-import {
-  SiHtml5,
-  SiCss3,
-  SiJavascript,
-  SiTypescript,
-  SiPython,
-  SiPhp,
-  SiTailwindcss,
-  SiReact,
-  SiNextdotjs,
-} from "react-icons/si";
-
-import { FaGithub, FaInstagram, FaLinkedin, FaJava } from "react-icons/fa";
-
 const techs = [
-  { name: "HTML", icon: <SiHtml5 className="text-orange-500" /> },
-  { name: "CSS", icon: <SiCss3 className="text-blue-500" /> },
-  { name: "JS", icon: <SiJavascript className="text-yellow-400" /> },
-  { name: "TypeScript", icon: <SiTypescript className="text-blue-600" /> },
-  { name: "Python", icon: <SiPython className="text-blue-400" /> },
-  { name: "PHP", icon: <SiPhp className="text-indigo-400" /> },
-  { name: "Tailwind", icon: <SiTailwindcss className="text-cyan-400" /> },
-  { name: "React", icon: <SiReact className="text-cyan-300" /> },
-  { name: "NextJS", icon: <SiNextdotjs className="text-white" /> },
-  { name: "Java", icon: <FaJava className="text-red-500" /> },
+  { name: "HTML5", src: "https://skillicons.dev/icons?i=html" },
+  { name: "CSS3", src: "https://skillicons.dev/icons?i=css" },
+  { name: "JavaScript", src: "https://skillicons.dev/icons?i=js" },
+  { name: "TypeScript", src: "https://skillicons.dev/icons?i=ts" },
+  { name: "React", src: "https://skillicons.dev/icons?i=react" },
+  { name: "NextJS", src: "https://skillicons.dev/icons?i=nextjs" },
+  { name: "Tailwind", src: "https://skillicons.dev/icons?i=tailwind" },
+  { name: "NodeJS", src: "https://skillicons.dev/icons?i=nodejs" },
+  { name: "Java", src: "https://skillicons.dev/icons?i=java" },
+  { name: "Kotlin", src: "https://skillicons.dev/icons?i=kotlin" },
+  { name: "C#", src: "https://skillicons.dev/icons?i=cs" },
+  { name: "Python", src: "https://skillicons.dev/icons?i=py" },
 ];
 
 export default function Hero() {
@@ -67,15 +55,33 @@ export default function Hero() {
             Techs :
           </h3>
 
-          <ul className="flex flex-wrap justify-center lg:justify-start gap-4 max-w-xl">
+          <ul className="flex flex-wrap justify-center lg:justify-start gap-4 max-w-2xl">
             {techs.map((tech) => (
               <li
                 key={tech.name}
-                className="p-4 bg-white/5 border border-white/10 rounded-xl hover:scale-110 hover:bg-white/10 hover:border-pink/50 hover:shadow-[0_0_20px_rgba(209,47,122,0.3)] group cursor-default"
                 title={tech.name}
+                className="group cursor-default"
               >
-                <div className="text-3xl">
-                  {tech.icon}
+                <div
+                  className="
+                  flex items-center justify-center
+                  p-3 rounded-xl
+                  bg-white/5 border border-white/10
+                  hover:scale-110
+                  hover:bg-white/10
+                  hover:border-pink/50
+                  hover:shadow-[0_0_20px_rgba(209,47,122,0.3)]
+                "
+                >
+                  <div className="relative w-10 h-10 lg:w-12 lg:h-12">
+                    <Image
+                      src={tech.src}
+                      alt={tech.name}
+                      fill
+                      className="object-contain drop-shadow-md"
+                      unoptimized={true}
+                    />
+                  </div>
                 </div>
               </li>
             ))}
@@ -101,27 +107,53 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="flex gap-6 z-20">
+        <div className="flex gap-4 z-20">
           <Link
             href="https://github.com/Kaiquii"
             target="_blank"
-            className="w-14 h-14 flex items-center justify-center bg-[#1a1a1a] rounded-full border border-white/10 hover:bg-black hover:border-white hover:scale-110 shadow-lg text-white text-2xl"
+            className="p-4 bg-white/5 border border-white/10 rounded-xl hover:scale-110 hover:bg-white/10 hover:border-pink/50 hover:shadow-[0_0_20px_rgba(209,47,122,0.3)] group"
           >
-            <FaGithub />
+            <div className="relative w-8 h-8">
+              <Image
+                src="https://skillicons.dev/icons?i=github"
+                alt="GitHub"
+                fill
+                className="object-contain"
+                unoptimized
+              />
+            </div>
           </Link>
+
           <Link
             href="https://www.instagram.com/kaiqui_luucas/"
             target="_blank"
-            className="w-14 h-14 flex items-center justify-center bg-[#1a1a1a] rounded-full border border-white/10 hover:bg-pink/20 hover:border-pink hover:scale-110 shadow-lg hover:shadow-pink/40 text-pink text-2xl"
+            className="p-4 bg-white/5 border border-white/10 rounded-xl hover:scale-110 hover:bg-white/10 hover:border-pink/50 hover:shadow-[0_0_20px_rgba(209,47,122,0.3)] group"
           >
-            <FaInstagram />
+            <div className="relative w-8 h-8">
+              <Image
+                src="https://skillicons.dev/icons?i=instagram"
+                alt="Instagram"
+                fill
+                className="object-contain"
+                unoptimized
+              />
+            </div>
           </Link>
+
           <Link
             href="https://www.linkedin.com/in/kaiqui-lucas/"
             target="_blank"
-            className="w-14 h-14 flex items-center justify-center bg-[#1a1a1a] rounded-full border border-white/10 hover:bg-blue-600/20 hover:border-blue-600 hover:scale-110 shadow-lg hover:shadow-blue-600/40 text-blue-500 text-2xl"
+            className="p-4 bg-white/5 border border-white/10 rounded-xl hover:scale-110 hover:bg-white/10 hover:border-pink/50 hover:shadow-[0_0_20px_rgba(209,47,122,0.3)] group"
           >
-            <FaLinkedin />
+            <div className="relative w-8 h-8">
+              <Image
+                src="https://skillicons.dev/icons?i=linkedin"
+                alt="LinkedIn"
+                fill
+                className="object-contain"
+                unoptimized
+              />
+            </div>
           </Link>
         </div>
       </motion.div>
