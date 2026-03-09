@@ -6,14 +6,6 @@ import { motion } from "framer-motion";
 
 const recommendations = [
   {
-    name: "Matheus Brito",
-    role: "Desenvolvedor de software fullstack",
-    company: "C Portal",
-    img: "/img/matheus-brito.png",
-    text: "Tive o prazer de trabalhar com o Kaiqui durante o período em que ele atuou como estagiário de Suporte Técnico. Desde o início, ele se destacou pelo interesse genuíno em aprender e se desenvolver. Sempre demonstrou proatividade, curiosidade técnica e disposição para ajudar os colegas — qualidades que, sem dúvida, farão diferença em sua trajetória profissional. É nítido que ele busca crescer continuamente, absorvendo feedbacks e buscando novas formas de melhorar. Com certeza tem um futuro promissor pela frente!",
-    featured: true,
-  },
-  {
     name: "Bruno Jardim",
     role: "Especialista de Manufatura | Green Belt",
     company: "Cie Automotive",
