@@ -1,0 +1,22 @@
+{
+  "name": "Portfólio - Kaiqui Dev",
+  "short_name": "Kaiqui Dev",
+  "description": "Desenvolvedor Full Stack apaixonado por tecnologia",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#d12f7a",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icons/icon-192x192..jpg",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-512x512.jpg",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
