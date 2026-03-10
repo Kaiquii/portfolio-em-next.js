@@ -35,7 +35,7 @@ export default function Testimonials() {
   return (
     <section
       id="testimonials"
-      className="py-20 bg-linear-to-br from-[#0a0a0a] to-[#1a1a1a] relative"
+      className="py-20 bg-linear-to-br from-white to-gray-50 dark:from-[#0a0a0a] dark:to-[#1a1a1a] relative"
     >
       <div className="max-w-350 mx-auto px-6 relative z-10">
         <div className="text-center mb-16">
@@ -56,10 +56,14 @@ export default function Testimonials() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.2 }}
-              className={`bg-[#1a1a1a] p-8 rounded-3xl border ${rec.featured ? "border-pink/30 shadow-[0_0_30px_rgba(209,47,122,0.1)]" : "border-white/10"} hover:border-pink/30 hover:shadow-xl group`}
+              className={`bg-white dark:bg-[#1a1a1a] p-8 rounded-3xl border ${
+                rec.featured
+                  ? "border-pink-500/50 shadow-[0_0_30px_rgba(209,47,122,0.1)]"
+                  : "border-black/10 dark:border-white/10"
+              } hover:border-pink-500/50 dark:hover:border-pink-500/50 shadow-sm dark:shadow-none hover:shadow-xl group`}
             >
               <div className="flex justify-between items-start mb-6">
-                <i className="fa-solid fa-quote-left text-4xl text-pink/70"></i>
+                <i className="fa-solid fa-quote-left text-4xl text-pink-400 dark:text-pink-500/70"></i>
                 <div className="flex gap-1 text-yellow-400 text-sm">
                   {[1, 2, 3, 4, 5].map((star) => (
                     <i key={star} className="fa-solid fa-star"></i>
@@ -67,7 +71,7 @@ export default function Testimonials() {
                 </div>
               </div>
 
-              <p className="text-gray-300 italic mb-8 leading-relaxed">
+              <p className="text-gray-600 dark:text-gray-300 italic mb-8 leading-relaxed">
                 &quot;{rec.text}&quot;
               </p>
 
@@ -78,17 +82,19 @@ export default function Testimonials() {
                     alt={rec.name}
                     width={50}
                     height={50}
-                    className="rounded-full w-full h-full object-cover border-2 border-transparent"
+                    className="rounded-full w-full h-full object-cover border-2 border-white dark:border-black"
                   />
                 </div>
                 <div>
-                  <h4 className="text-white font-bold text-lg group-hover:text-pink">
+                  <h4 className="text-gray-900 dark:text-white font-bold text-lg group-hover:text-pink-600 dark:group-hover:text-pink-500">
                     {rec.name}
                   </h4>
-                  <span className="block text-pink text-sm font-medium">
+                  <span className="block text-pink-600 dark:text-pink-500 text-sm font-medium">
                     {rec.role}
                   </span>
-                  <span className="text-gray-500 text-xs">{rec.company}</span>
+                  <span className="text-gray-500 dark:text-gray-500 text-xs">
+                    {rec.company}
+                  </span>
                 </div>
               </div>
             </motion.div>

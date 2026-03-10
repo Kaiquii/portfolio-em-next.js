@@ -6,8 +6,8 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-[#0a0a0a] pt-16 pb-8 border-t border-white/5 relative overflow-hidden">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,rgba(209,47,122,0.05),transparent_50%)] pointer-events-none" />
+    <footer className="bg-white dark:bg-[#0a0a0a] pt-16 pb-8 border-t border-black/5 dark:border-white/5 relative overflow-hidden">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,rgba(209,47,122,0.02),transparent_50%)] dark:bg-[radial-gradient(circle_at_20%_80%,rgba(209,47,122,0.05),transparent_50%)] pointer-events-none" />
 
       <div className="max-w-300 mx-auto px-6 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-12">
@@ -15,14 +15,14 @@ export default function Footer() {
             <h2 className="text-3xl font-bold bg-linear-to-r from-pink to-blue bg-clip-text text-transparent">
               kaiqui.dev
             </h2>
-            <p className="text-gray-400 leading-relaxed max-w-xs">
+            <p className="text-gray-600 dark:text-gray-400 leading-relaxed max-w-xs">
               Desenvolvedor Full Stack apaixonado por tecnologia e inovação.
               Transformando ideias em realidade digital.
             </p>
           </div>
 
           <div>
-            <h4 className="text-xl font-bold text-white mb-6 relative inline-block after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-8 after:h-0.5 after:bg-linear-to-r after:from-pink after:to-blue">
+            <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-6 relative inline-block after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-8 after:h-0.5 after:bg-linear-to-r after:from-pink after:to-blue">
               Navegação
             </h4>
             <ul className="space-y-3">
@@ -31,9 +31,9 @@ export default function Footer() {
                   <li key={item}>
                     <Link
                       href={`#${item.toLowerCase().replace("çõ", "co").replace("é", "e")}`}
-                      className="text-gray-400 hover:text-pink relative group flex items-center"
+                      className="text-gray-600 dark:text-gray-400 hover:text-pink-600 dark:hover:text-pink-500 relative group flex items-center"
                     >
-                      <span className="w-0 h-px bg-pink mr-0 group-hover:w-3 group-hover:mr-2"></span>
+                      <span className="w-0 h-px bg-pink-600 dark:bg-pink-500 mr-0 group-hover:w-3 group-hover:mr-2"></span>
                       {item}
                     </Link>
                   </li>
@@ -43,7 +43,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="text-xl font-bold text-white mb-6 relative inline-block after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-8 after:h-0.5 after:bg-linear-to-r after:from-pink after:to-blue">
+            <h4 className="text-xl font-bold text-gray-900 dark:text-white mb-6 relative inline-block after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-8 after:h-0.5 after:bg-linear-to-r after:from-pink after:to-blue">
               Conecte-se
             </h4>
             <ul className="space-y-3">
@@ -51,7 +51,7 @@ export default function Footer() {
                 <Link
                   href="https://www.linkedin.com/in/kaiqui-lucas/"
                   target="_blank"
-                  className="text-gray-400 hover:text-[#0077B5]"
+                  className="text-gray-600 dark:text-gray-400 hover:text-[#0077B5]"
                 >
                   <i className="fa-brands fa-linkedin w-6"></i> LinkedIn
                 </Link>
@@ -60,7 +60,7 @@ export default function Footer() {
                 <Link
                   href="https://github.com/Kaiquii"
                   target="_blank"
-                  className="text-gray-400 hover:text-white"
+                  className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
                 >
                   <i className="fa-brands fa-github w-6"></i> GitHub
                 </Link>
@@ -69,7 +69,7 @@ export default function Footer() {
                 <Link
                   href="https://www.instagram.com/kaiqui_luucas/"
                   target="_blank"
-                  className="text-gray-400 hover:text-[#E1306C]"
+                  className="text-gray-600 dark:text-gray-400 hover:text-[#E1306C]"
                 >
                   <i className="fa-brands fa-instagram w-6"></i> Instagram
                 </Link>
@@ -77,7 +77,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="mailto:kaiqui.lucaskaiquiluc@gmail.com"
-                  className="text-gray-400 hover:text-red-500"
+                  className="text-gray-600 dark:text-gray-400 hover:text-red-500"
                 >
                   <i className="fa-solid fa-envelope w-6"></i> E-mail
                 </Link>
@@ -86,7 +86,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500">
+        <div className="border-t border-black/10 dark:border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500">
           <p>© {currentYear} Kaiqui Lucas. Todos os direitos reservados.</p>
           <p className="flex items-center gap-2">
             Feito com <span className="text-red-500 animate-pulse">❤️</span> e

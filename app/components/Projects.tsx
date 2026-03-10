@@ -115,14 +115,14 @@ export default function Projects() {
   return (
     <section
       id="projects"
-      className="py-20 relative bg-linear-to-br from-black to-[#1a1a1a]"
+      className="py-20 relative bg-linear-to-br from-gray-50 to-gray-100 dark:from-black dark:to-[#1a1a1a]"
     >
       <div className="max-w-350 mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-4xl lg:text-5xl font-bold bg-linear-to-r from-pink to-blue bg-clip-text text-transparent mb-4">
             Meus Projetos
           </h2>
-          <p className="text-gray-400 text-lg">
+          <p className="text-gray-600 dark:text-gray-400 text-lg">
             Explore alguns dos projetos que desenvolvi para demonstrar minhas
             habilidades
           </p>
@@ -133,9 +133,9 @@ export default function Projects() {
             ref={setPrevEl}
             className="absolute -left-2 lg:-left-6 top-1/2 -translate-y-1/2 z-20 
                        w-12 h-12 lg:w-14 lg:h-14 flex items-center justify-center
-                       bg-[#1a1a1a]/80 backdrop-blur-md border border-white/10 rounded-full text-white 
-                       shadow-[0_4px_20px_rgba(0,0,0,0.5)] ease-out
-                       hover:scale-110 hover:border-pink hover:text-pink hover:bg-pink/10 hover:shadow-[0_0_20px_rgba(209,47,122,0.4)]
+                       bg-white/80 dark:bg-[#1a1a1a]/80 backdrop-blur-md border border-black/10 dark:border-white/10 rounded-full text-gray-900 dark:text-white 
+                       shadow-[0_4px_20px_rgba(0,0,0,0.1)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.5)] ease-out
+                       hover:scale-110 hover:border-pink hover:text-pink hover:bg-pink/10 hover:shadow-[0_0_20px_rgba(209,47,122,0.3)] dark:hover:shadow-[0_0_20px_rgba(209,47,122,0.4)]
                        disabled:opacity-0 disabled:cursor-not-allowed md:flex"
             aria-label="Anterior"
           >
@@ -146,14 +146,15 @@ export default function Projects() {
             ref={setNextEl}
             className="absolute -right-2 lg:-right-6 top-1/2 -translate-y-1/2 z-20 
                        w-12 h-12 lg:w-14 lg:h-14 flex items-center justify-center
-                       bg-[#1a1a1a]/80 backdrop-blur-md border border-white/10 rounded-full text-white 
-                       shadow-[0_4px_20px_rgba(0,0,0,0.5)] ease-out
-                       hover:scale-110 hover:border-pink hover:text-pink hover:bg-pink/10 hover:shadow-[0_0_20px_rgba(209,47,122,0.4)]
+                       bg-white/80 dark:bg-[#1a1a1a]/80 backdrop-blur-md border border-black/10 dark:border-white/10 rounded-full text-gray-900 dark:text-white 
+                       shadow-[0_4px_20px_rgba(0,0,0,0.1)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.5)] ease-out
+                       hover:scale-110 hover:border-pink hover:text-pink hover:bg-pink/10 hover:shadow-[0_0_20px_rgba(209,47,122,0.3)] dark:hover:shadow-[0_0_20px_rgba(209,47,122,0.4)]
                        disabled:opacity-0 disabled:cursor-not-allowed md:flex"
             aria-label="Próximo"
           >
             <FaChevronRight size={20} className="relative -right-0.5" />
           </button>
+          
           <Swiper
             modules={[Pagination, Navigation]}
             spaceBetween={30}
@@ -170,7 +171,7 @@ export default function Projects() {
             style={
               {
                 "--swiper-pagination-color": "#d12f7a",
-                "--swiper-pagination-bullet-inactive-color": "#555",
+                "--swiper-pagination-bullet-inactive-color": "#888",
                 "--swiper-pagination-bullet-inactive-opacity": "1",
                 "--swiper-pagination-bottom": "0px",
               } as React.CSSProperties
@@ -179,19 +180,19 @@ export default function Projects() {
           >
             {projects.map((project) => (
               <SwiperSlide key={project.id} className="h-auto">
-                <div className="bg-[#1a1a1a] border border-white/10 rounded-2xl overflow-hidden hover:border-pink/30 hover:shadow-[0_0_20px_rgba(209,47,122,0.2)] group h-full flex flex-col">
-                  <div className="relative h-55 w-full overflow-hidden border-b border-white/5">
+                <div className="bg-white dark:bg-[#1a1a1a] border border-black/10 dark:border-white/10 rounded-2xl overflow-hidden hover:border-pink/50 dark:hover:border-pink/30 shadow-md dark:shadow-none hover:shadow-[0_0_20px_rgba(209,47,122,0.15)] dark:hover:shadow-[0_0_20px_rgba(209,47,122,0.2)] group h-full flex flex-col">
+                  <div className="relative h-55 w-full overflow-hidden border-b border-black/5 dark:border-white/5">
                     <Image
                       src={project.img}
                       alt={project.title}
                       fill
                       className="object-cover group-hover:scale-110"
                     />
-                    <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 flex items-center justify-center backdrop-blur-sm">
+                    <div className="absolute inset-0 bg-white/60 dark:bg-black/60 opacity-0 group-hover:opacity-100 flex items-center justify-center backdrop-blur-sm">
                       <Link
                         href={project.live}
                         target="_blank"
-                        className="text-white text-3xl hover:text-pink hover:scale-125"
+                        className="text-gray-900 dark:text-white text-3xl hover:text-pink dark:hover:text-pink hover:scale-125"
                       >
                         <FaExternalLinkAlt />
                       </Link>
@@ -199,11 +200,11 @@ export default function Projects() {
                   </div>
 
                   <div className="p-6 flex flex-col grow">
-                    <h3 className="text-xl font-bold mb-3 text-white line-clamp-1">
+                    <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white line-clamp-1">
                       {project.title}
                     </h3>
 
-                    <p className="text-gray-400 text-sm mb-4 grow line-clamp-3 leading-relaxed">
+                    <p className="text-gray-600 dark:text-gray-400 text-sm mb-4 grow line-clamp-3 leading-relaxed">
                       {project.desc}
                     </p>
 
@@ -211,7 +212,7 @@ export default function Projects() {
                       {project.tags.map((tag) => (
                         <span
                           key={tag}
-                          className="text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-pink/10 text-pink border border-pink/20"
+                          className="text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-pink-100 dark:bg-pink-900/30 text-pink-700 dark:text-pink-400 border border-pink-200 dark:border-pink-500/20"
                         >
                           {tag}
                         </span>
@@ -222,14 +223,14 @@ export default function Projects() {
                       <Link
                         href={project.repo}
                         target="_blank"
-                        className="flex-1 py-3 rounded-xl bg-white/5 border border-white/10 text-center text-sm font-bold text-white hover:bg-white/10 flex items-center justify-center gap-2"
+                        className="flex-1 py-3 rounded-xl bg-gray-100 dark:bg-white/5 border border-black/10 dark:border-white/10 text-center text-sm font-bold text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-white/10 flex items-center justify-center gap-2"
                       >
                         <FaGithub size={16} /> Código
                       </Link>
                       <Link
                         href={project.live}
                         target="_blank"
-                        className="flex-1 py-3 rounded-xl bg-linear-to-r from-pink to-blue text-center text-sm font-bold text-white hover:shadow-[0_0_15px_rgba(209,47,122,0.4)] flex items-center justify-center gap-2"
+                        className="flex-1 py-3 rounded-xl bg-linear-to-r from-pink to-blue text-center text-sm font-bold text-white hover:shadow-[0_0_15px_rgba(209,47,122,0.3)] dark:hover:shadow-[0_0_15px_rgba(209,47,122,0.4)] flex items-center justify-center gap-2"
                       >
                         <FaExternalLinkAlt size={14} /> Ver Site
                       </Link>

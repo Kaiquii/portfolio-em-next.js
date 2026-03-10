@@ -33,6 +33,8 @@
   }
 }
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 html {
   scroll-behavior: smooth;
   background: var(--color-black);
@@ -45,17 +47,18 @@ body {
 }
 
 .swiper-pagination-bullet {
-  background-color: rgba(255, 255, 255, 0.3) !important;
-  width: 10px !important;
-  height: 10px !important;
+  background-color: #cbd5e1 !important;
   opacity: 1 !important;
-  transition: all 0.3s ease !important;
+}
+
+.dark .swiper-pagination-bullet {
+  background-color: #4b5563 !important;
 }
 
 .swiper-pagination-bullet-active {
-  background: linear-gradient(135deg, #d12f7a, #073fcc) !important;
-  width: 25px !important;
-  border-radius: 5px !important;
+  background: linear-gradient(to right, #ec4899, #3b82f6) !important;
+  width: 24px !important;
+  border-radius: 12px !important;
 }
 
 .swiper-button-next,

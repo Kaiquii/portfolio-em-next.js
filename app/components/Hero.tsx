@@ -34,10 +34,10 @@ export default function Hero() {
           transition={{ duration: 0.8 }}
           className="mb-8"
         >
-          <h1 className="text-4xl lg:text-6xl font-bold mb-2 text-white">
+          <h1 className="text-4xl lg:text-6xl font-bold mb-2 text-gray-900 dark:text-white">
             Olá,
           </h1>
-          <h1 className="text-4xl lg:text-6xl font-bold mb-4 text-white">
+          <h1 className="text-4xl lg:text-6xl font-bold mb-4 text-gray-900 dark:text-white">
             Meu nome é
           </h1>
           <h1 className="text-5xl lg:text-7xl font-bold bg-linear-to-r from-pink to-blue bg-clip-text text-transparent pb-2">
@@ -51,7 +51,7 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.3 }}
           className="flex flex-col items-center lg:items-start w-full"
         >
-          <h3 className="text-xl mb-6 relative inline-block text-white after:content-[''] after:absolute after:-bottom-1.25 after:w-full after:h-0.5 after:bg-linear-to-r after:from-pink after:to-blue">
+          <h3 className="text-xl mb-6 relative inline-block text-gray-900 dark:text-white after:content-[''] after:absolute after:-bottom-1.25 after:w-full after:h-0.5 after:bg-linear-to-r after:from-pink after:to-blue">
             Techs :
           </h3>
 
@@ -66,11 +66,12 @@ export default function Hero() {
                   className="
                   flex items-center justify-center
                   p-3 rounded-xl
-                  bg-white/5 border border-white/10
+                  bg-white dark:bg-white/5 border border-black/10 dark:border-white/10
+                  shadow-sm dark:shadow-none
                   hover:scale-110
-                  hover:bg-white/10
-                  hover:border-pink/50
-                  hover:shadow-[0_0_20px_rgba(209,47,122,0.3)]
+                  hover:bg-black/5 dark:hover:bg-white/10
+                  hover:border-pink/50 dark:hover:border-pink/50
+                  hover:shadow-[0_0_20px_rgba(209,47,122,0.2)] dark:hover:shadow-[0_0_20px_rgba(209,47,122,0.3)]
                 "
                 >
                   <div className="relative w-10 h-10 lg:w-12 lg:h-12">
@@ -96,7 +97,7 @@ export default function Hero() {
         className="w-full lg:w-1/2 flex flex-col items-center justify-center relative"
       >
         <div className="relative w-70 h-70 lg:w-100 lg:h-100 rounded-full p-0.75 bg-linear-to-tr from-orange-400 via-pink-500 to-blue-600 animate-[profileGlow_4s_ease-in-out_infinite] mb-8">
-          <div className="w-full h-full rounded-full overflow-hidden relative border-4 border-black bg-black">
+          <div className="w-full h-full rounded-full overflow-hidden relative border-4 border-white dark:border-black bg-white dark:bg-black">
             <Image
               src="/img/foto-kaiqui.jpg"
               alt="Kaiqui Lucas"
@@ -111,7 +112,7 @@ export default function Hero() {
           <Link
             href="https://github.com/Kaiquii"
             target="_blank"
-            className="p-4 bg-white/5 border border-white/10 rounded-xl hover:scale-110 hover:bg-white/10 hover:border-pink/50 hover:shadow-[0_0_20px_rgba(209,47,122,0.3)] group"
+            className="p-4 bg-white dark:bg-white/5 border border-black/10 dark:border-white/10 shadow-sm dark:shadow-none rounded-xl hover:scale-110 hover:bg-black/5 dark:hover:bg-white/10 hover:border-pink/50 dark:hover:border-pink/50 hover:shadow-[0_0_20px_rgba(209,47,122,0.2)] dark:hover:shadow-[0_0_20px_rgba(209,47,122,0.3)] group"
           >
             <div className="relative w-8 h-8">
               <Image
@@ -127,7 +128,7 @@ export default function Hero() {
           <Link
             href="https://www.instagram.com/kaiqui_luucas/"
             target="_blank"
-            className="p-4 bg-white/5 border border-white/10 rounded-xl hover:scale-110 hover:bg-white/10 hover:border-pink/50 hover:shadow-[0_0_20px_rgba(209,47,122,0.3)] group"
+            className="p-4 bg-white dark:bg-white/5 border border-black/10 dark:border-white/10 shadow-sm dark:shadow-none rounded-xl hover:scale-110 hover:bg-black/5 dark:hover:bg-white/10 hover:border-pink/50 dark:hover:border-pink/50 hover:shadow-[0_0_20px_rgba(209,47,122,0.2)] dark:hover:shadow-[0_0_20px_rgba(209,47,122,0.3)] group"
           >
             <div className="relative w-8 h-8">
               <Image
@@ -143,7 +144,7 @@ export default function Hero() {
           <Link
             href="https://www.linkedin.com/in/kaiqui-lucas/"
             target="_blank"
-            className="p-4 bg-white/5 border border-white/10 rounded-xl hover:scale-110 hover:bg-white/10 hover:border-pink/50 hover:shadow-[0_0_20px_rgba(209,47,122,0.3)] group"
+            className="p-4 bg-white dark:bg-white/5 border border-black/10 dark:border-white/10 shadow-sm dark:shadow-none rounded-xl hover:scale-110 hover:bg-black/5 dark:hover:bg-white/10 hover:border-pink/50 dark:hover:border-pink/50 hover:shadow-[0_0_20px_rgba(209,47,122,0.2)] dark:hover:shadow-[0_0_20px_rgba(209,47,122,0.3)] group"
           >
             <div className="relative w-8 h-8">
               <Image

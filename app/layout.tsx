@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Poppins } from "next/font/google";
+import ThemeProvider from "./components/ThemeProvider";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -20,7 +21,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#000000",
+  themeColor: "#d12f7a",
 };
 
 export default function RootLayout({
@@ -29,16 +30,32 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-br" className="scroll-smooth">
+    <html lang="pt-br" className="scroll-smooth dark">
       <head>
         <link
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
         />
-        <link rel="apple-touch-icon" href="/icons/icon-192x192.jpg" />
+        <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
+        
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                let theme = localStorage.getItem('theme-storage');
+                if (theme) {
+                  theme = JSON.parse(theme).state.theme;
+                  if (theme === 'light') document.documentElement.classList.remove('dark');
+                }
+              } catch (e) {}
+            `,
+          }}
+        />
       </head>
-      <body className={`${poppins.variable} antialiased bg-black text-white`}>
-        {children}
+      <body className={`${poppins.variable} antialiased bg-gray-50 text-black dark:bg-black dark:text-white`}>
+        <ThemeProvider>
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import ThemeToggle from "./ThemeToogle";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -37,12 +38,15 @@ export default function Navbar() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 ${
         scrolled
-          ? "bg-black/95 backdrop-blur-md shadow-lg py-3"
+          ? "bg-white/95 dark:bg-black/95 backdrop-blur-md shadow-lg py-3 border-b border-black/5 dark:border-white/5"
           : "bg-transparent py-5"
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-        <Link href="/" className="text-2xl font-bold hover:text-pink z-50">
+        <Link
+          href="/"
+          className="text-2xl font-bold hover:text-pink z-50 text-black dark:text-white"
+        >
           <h1>kaiqui.dev</h1>
         </Link>
 
@@ -52,7 +56,7 @@ export default function Navbar() {
               <li key={item.name}>
                 <Link
                   href={item.href}
-                  className="text-white text-base font-medium hover:text-pink relative group py-2"
+                  className="text-black dark:text-white text-base font-medium hover:text-pink dark:hover:text-pink relative group py-2"
                 >
                   {item.name}
                   <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-pink group-hover:w-full"></span>
@@ -62,24 +66,38 @@ export default function Navbar() {
           </ul>
         </nav>
 
-        <button
-          className="lg:hidden flex flex-col justify-around w-10 h-10 p-2 z-50 relative focus:outline-none"
-          onClick={() => setIsOpen(!isOpen)}
-          aria-label="Abrir Menu"
-        >
-          <span
-            className={`block w-full h-0.75 bg-white rounded ${isOpen ? "rotate-45 translate-y-2.5 bg-pink" : ""}`}
-          />
-          <span
-            className={`block w-full h-0.75 bg-white rounded ${isOpen ? "opacity-0" : ""}`}
-          />
-          <span
-            className={`block w-full h-0.75 bg-white rounded ${isOpen ? "-rotate-45 -translate-y-2.5 bg-pink" : ""}`}
-          />
-        </button>
+        <div className="flex items-center gap-4 z-50">
+          <ThemeToggle />
+
+          <button
+            className="lg:hidden flex flex-col justify-around w-10 h-10 p-2 relative focus:outline-none"
+            onClick={() => setIsOpen(!isOpen)}
+            aria-label="Abrir Menu"
+          >
+            <span
+              className={`block w-full h-0.75 rounded ${
+                isOpen
+                  ? "rotate-45 translate-y-2.5 bg-pink"
+                  : "bg-black dark:bg-white"
+              }`}
+            />
+            <span
+              className={`block w-full h-0.75 rounded ${
+                isOpen ? "opacity-0" : "bg-black dark:bg-white"
+              }`}
+            />
+            <span
+              className={`block w-full h-0.75 rounded ${
+                isOpen
+                  ? "-rotate-45 -translate-y-2.5 bg-pink"
+                  : "bg-black dark:bg-white"
+              }`}
+            />
+          </button>
+        </div>
 
         <div
-          className={`fixed top-0 left-0 w-full h-dvh bg-black flex flex-col items-center justify-center gap-8 lg:hidden z-40 ${
+          className={`fixed top-0 left-0 w-full h-dvh bg-white dark:bg-black flex flex-col items-center justify-center gap-8 lg:hidden z-40 ${
             isOpen
               ? "opacity-100 visible"
               : "opacity-0 invisible pointer-events-none"
@@ -89,7 +107,7 @@ export default function Navbar() {
             <Link
               key={item.name}
               href={item.href}
-              className="text-2xl font-bold text-white hover:text-pink"
+              className="text-2xl font-bold text-black dark:text-white hover:text-pink dark:hover:text-pink"
               onClick={() => setIsOpen(false)}
             >
               {item.name}

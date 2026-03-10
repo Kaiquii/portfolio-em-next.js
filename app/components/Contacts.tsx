@@ -40,17 +40,17 @@ export default function Contacts() {
   return (
     <section
       id="contacts"
-      className="py-20 bg-linear-to-br from-[#0a0a0a] to-[#1a1a1a] relative"
+      className="py-20 bg-linear-to-br from-gray-50 to-gray-100 dark:from-[#0a0a0a] dark:to-[#1a1a1a] relative"
     >
       <div className="max-w-300 mx-auto px-6 relative z-10">
         <div className="text-center mb-16">
           <h2 className="flex items-center justify-center gap-4 text-4xl lg:text-5xl font-bold bg-linear-to-r from-pink to-blue bg-clip-text text-transparent mb-4">
-            <span className="text-4xl filter drop-shadow-[0_0_10px_rgba(209,47,122,0.5)]">
+            <span className="text-4xl filter drop-shadow-[0_0_10px_rgba(209,47,122,0.3)] dark:drop-shadow-[0_0_10px_rgba(209,47,122,0.5)]">
               💬
             </span>{" "}
             Vamos conversar?
           </h2>
-          <p className="text-gray-400 text-lg">
+          <p className="text-gray-600 dark:text-gray-400 text-lg">
             Entre em contato comigo através dos canais abaixo
           </p>
         </div>
@@ -62,7 +62,7 @@ export default function Contacts() {
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.4, delay: index * 0.1 }}
-              className="bg-[#1a1a1a] p-8 rounded-3xl border border-white/10 hover:border-pink/30 hover:shadow-2xl hover:-translate-y-2 group"
+              className="bg-white dark:bg-[#1a1a1a] p-8 rounded-3xl border border-black/10 dark:border-white/10 shadow-sm dark:shadow-none hover:border-pink-500/50 dark:hover:border-pink-500/30 hover:shadow-xl dark:hover:shadow-2xl hover:-translate-y-2 group"
             >
               <div className="flex items-center gap-4 mb-6">
                 <div
@@ -71,15 +71,15 @@ export default function Contacts() {
                   <i className={method.icon}></i>
                 </div>
                 <div>
-                  <h3 className="text-white font-bold text-xl">
+                  <h3 className="text-gray-900 dark:text-white font-bold text-xl">
                     {method.title}
                   </h3>
-                  <span className="text-xs bg-white/10 text-gray-300 px-3 py-1 rounded-full">
+                  <span className="text-xs bg-black/5 dark:bg-white/10 text-gray-700 dark:text-gray-300 px-3 py-1 rounded-full">
                     {method.status}
                   </span>
                 </div>
               </div>
-              <p className="text-gray-400 mb-6 h-12">{method.desc}</p>
+              <p className="text-gray-600 dark:text-gray-400 mb-6 h-12">{method.desc}</p>
               <Link
                 href={method.link}
                 target="_blank"
@@ -92,8 +92,8 @@ export default function Contacts() {
         </div>
 
         <div className="text-center">
-          <p className="inline-flex items-center gap-2 bg-white/5 border border-white/10 px-8 py-4 rounded-full text-gray-400">
-            <i className="fa-solid fa-clock text-pink"></i> Resposta garantida
+          <p className="inline-flex items-center gap-2 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 px-8 py-4 rounded-full text-gray-700 dark:text-gray-400">
+            <i className="fa-solid fa-clock text-pink-600 dark:text-pink-500"></i> Resposta garantida
             em até 24 horas
           </p>
         </div>
