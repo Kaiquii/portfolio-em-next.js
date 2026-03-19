@@ -266,7 +266,7 @@ export default function About() {
 
           <div className="flex flex-wrap gap-4">
             <a
-              href="/document/CV Dev Kaiqui.pdf"
+              href="/document/CV Dev Kaiqui - Canva.pdf"
               download
               className="flex items-center justify-center gap-2 px-8 py-3 rounded-full bg-linear-to-br from-pink-600 to-blue-600 text-white font-bold shadow-lg hover:shadow-pink-500/30 hover:-translate-y-1 flex-1 md:flex-none"
             >
