@@ -154,7 +154,7 @@ export default function Projects() {
           >
             <FaChevronRight size={20} className="relative -right-0.5" />
           </button>
-          
+
           <Swiper
             modules={[Pagination, Navigation]}
             spaceBetween={30}
