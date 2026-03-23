@@ -15,6 +15,7 @@ const techs = [
   { name: "NodeJS", src: "https://skillicons.dev/icons?i=nodejs" },
   { name: "Java", src: "https://skillicons.dev/icons?i=java" },
   { name: "Kotlin", src: "https://skillicons.dev/icons?i=kotlin" },
+  { name: "Go", src: "https://skillicons.dev/icons?i=go" },
   { name: "C#", src: "https://skillicons.dev/icons?i=cs" },
   { name: "Python", src: "https://skillicons.dev/icons?i=py" },
 ];

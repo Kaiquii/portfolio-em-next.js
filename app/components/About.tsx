@@ -12,8 +12,10 @@ import {
   FaGithub,
   FaDocker,
   FaNodeJs,
+  FaJava,
+  FaPython,
 } from "react-icons/fa";
-import { SiReact, SiNextdotjs, SiSharp, SiKotlin } from "react-icons/si";
+import { SiReact, SiNextdotjs, SiKotlin, SiGo } from "react-icons/si";
 
 export default function About() {
   const calculateAge = (birthDate: string) => {
@@ -39,6 +41,7 @@ export default function About() {
     "NodeJS",
     "Java",
     "Kotlin",
+    "Go",
     "C#",
     "Python",
   ];
@@ -114,7 +117,7 @@ export default function About() {
                     <div className="flex items-center group/line hover:bg-white/5 py-1 rounded">
                       <span className="text-gray-500 w-6 select-none">6</span>
                       <span className="text-green-400 ml-10">
-                        &quot;Next.js&quot;
+                        &quot;NextJS&quot;
                       </span>
                       <SiNextdotjs className="ml-3 text-white text-lg" />
                       <span className="text-white">,</span>
@@ -130,9 +133,9 @@ export default function About() {
                     <div className="flex items-center group/line hover:bg-white/5 py-1 rounded">
                       <span className="text-gray-500 w-6 select-none">8</span>
                       <span className="text-green-400 ml-10">
-                        &quot;C# / .NET&quot;
+                        &quot;Java&quot;
                       </span>
-                      <SiSharp className="ml-3 text-violet-500 text-lg" />
+                      <FaJava className="ml-3 text-orange-500 text-lg" />
                       <span className="text-white">,</span>
                     </div>
                     <div className="flex items-center group/line hover:bg-white/5 py-1 rounded">
@@ -141,14 +144,30 @@ export default function About() {
                         &quot;Kotlin&quot;
                       </span>
                       <SiKotlin className="ml-3 text-purple-400 text-lg" />
+                      <span className="text-white">,</span>
+                    </div>
+                    <div className="flex items-center group/line hover:bg-white/5 py-1 rounded">
+                      <span className="text-gray-500 w-6 select-none">10</span>
+                      <span className="text-green-400 ml-10">
+                        &quot;Go&quot;
+                      </span>
+                      <SiGo className="ml-3 text-cyan-500 text-lg" />
+                      <span className="text-white">,</span>
+                    </div>
+                    <div className="flex items-center group/line hover:bg-white/5 py-1 rounded">
+                      <span className="text-gray-500 w-6 select-none">11</span>
+                      <span className="text-green-400 ml-10">
+                        &quot;Python&quot;
+                      </span>
+                      <FaPython className="ml-3 text-blue-500 text-lg" />
                     </div>
 
                     <div className="flex">
-                      <span className="text-gray-500 w-6 select-none">10</span>
+                      <span className="text-gray-500 w-6 select-none">12</span>
                       <span className="text-yellow-300 ml-6">{"]"}</span>
                     </div>
                     <div className="flex">
-                      <span className="text-gray-500 w-6 select-none">11</span>
+                      <span className="text-gray-500 w-6 select-none">13</span>
                       <span className="text-yellow-300">{"}"}</span>
                       <span className="text-white">;</span>
                     </div>
@@ -244,7 +263,8 @@ export default function About() {
                   Stack Versátil
                 </h4>
                 <p className="text-gray-600 dark:text-gray-400 text-sm">
-                  Do Front-end (React/Next) ao Back-end (Java/C#/Node).
+                  Do Front-end (React/Next/Kotlin com Jetpack Compose) ao
+                  Back-end (Java/Kotlin/C#/Node/Go).
                 </p>
               </div>
             </div>
