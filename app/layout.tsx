@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Poppins } from "next/font/google";
-import ThemeProvider from "./components/ThemeProvider";
+import ThemeProvider from "./components/ui/ThemeProvider";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -37,7 +37,7 @@ export default function RootLayout({
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
         />
         <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
-        
+
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -52,10 +52,10 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={`${poppins.variable} antialiased bg-gray-50 text-black dark:bg-black dark:text-white`}>
-        <ThemeProvider>
-          {children}
-        </ThemeProvider>
+      <body
+        className={`${poppins.variable} antialiased bg-gray-50 text-black dark:bg-black dark:text-white`}
+      >
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   );

@@ -1,57 +1,55 @@
 "use client";
 
 import { useState, useEffect, useMemo } from "react";
-import {
-  FaGithub,
-  FaStar,
-  FaCodeBranch,
-  FaSpinner,
-  FaSearch,
-} from "react-icons/fa";
+import { FaCodeBranch, FaSpinner, FaSearch } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 import { getGithubRepos } from "../api/gitHub";
 import { GithubRepo } from "../types/githubTypes";
+import RepoCard from "./ui/RepoCard";
+import FilterDropdown from "./ui/FilterDropdown";
 
 export default function GithubSection() {
   const [repos, setRepos] = useState<GithubRepo[]>([]);
   const [loading, setLoading] = useState(true);
   const [activeFilter, setActiveFilter] = useState<string>("Todos");
   const [searchQuery, setSearchQuery] = useState<string>("");
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   useEffect(() => {
     const fetchRepos = async () => {
       try {
         const data = await getGithubRepos();
-
-        const cleanedData = data.filter(
-          (repo) => repo.name.toLowerCase() !== "kaiquii",
-        );
-
-        setRepos(cleanedData);
+        setRepos(data.filter((repo) => repo.name.toLowerCase() !== "kaiquii"));
       } catch (error) {
         console.error("Erro ao carregar repositórios", error);
       } finally {
         setLoading(false);
       }
     };
-
     fetchRepos();
   }, []);
 
-  const languages = useMemo(() => {
+  const filterStats = useMemo(() => {
+    const stats = [{ name: "Todos", count: repos.length }];
     const langs = new Set(repos.map((r) => r.language).filter(Boolean));
-    return ["Todos", ...Array.from(langs)];
+
+    Array.from(langs).forEach((lang) => {
+      const count = repos.filter((r) => r.language === lang).length;
+      stats.push({ name: lang, count });
+    });
+
+    return [stats[0], ...stats.slice(1).sort((a, b) => b.count - a.count)];
   }, [repos]);
 
   const filteredRepos = useMemo(() => {
     let result = repos;
 
-    if (searchQuery.trim() !== "") {
+    if (searchQuery.trim()) {
       const query = searchQuery.toLowerCase();
       result = result.filter(
         (r) =>
           r.name.toLowerCase().includes(query) ||
-          (r.description && r.description.toLowerCase().includes(query)),
+          r.description?.toLowerCase().includes(query),
       );
     }
 
@@ -59,32 +57,14 @@ export default function GithubSection() {
       result = result.filter((r) => r.language === activeFilter);
     }
 
-    if (activeFilter === "Todos" && searchQuery.trim() === "") {
+    if (activeFilter === "Todos" && !searchQuery.trim()) {
       return result.slice(0, 8);
     }
 
     return result;
   }, [repos, activeFilter, searchQuery]);
 
-  const getLanguageColor = (lang: string) => {
-    const colors: Record<string, string> = {
-      TypeScript: "bg-blue-500",
-      JavaScript: "bg-yellow-400",
-      HTML: "bg-orange-500",
-      CSS: "bg-blue-300",
-      Java: "bg-red-500",
-      "C#": "bg-green-600",
-      Python: "bg-blue-400",
-      Go: "bg-cyan-500",
-      Kotlin: "bg-purple-500",
-      PHP: "bg-indigo-500",
-    };
-    return colors[lang] || "bg-gray-400";
-  };
-
-  if (!loading && repos.length === 0) {
-    return null;
-  }
+  if (!loading && repos.length === 0) return null;
 
   return (
     <section
@@ -97,7 +77,11 @@ export default function GithubSection() {
             Repositórios Recentes
           </h2>
           <p className="text-gray-600 dark:text-gray-400 text-lg">
-            Direto do meu GitHub, filtrados por tecnologia
+            Explorando um total de{" "}
+            <strong className="text-pink-600 dark:text-pink-500">
+              {repos.length} projetos
+            </strong>{" "}
+            no meu GitHub
           </p>
         </div>
 
@@ -110,85 +94,34 @@ export default function GithubSection() {
           </div>
         ) : (
           <div>
-            <div className="relative max-w-md mx-auto mb-8">
-              <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                <FaSearch className="text-gray-400" />
+            <div className="flex flex-col md:flex-row gap-4 justify-center max-w-2xl mx-auto mb-10">
+              <div className="relative w-full md:w-1/2">
+                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                  <FaSearch className="text-gray-400" />
+                </div>
+                <input
+                  type="text"
+                  placeholder="Buscar repositório..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full pl-11 pr-4 py-3 rounded-xl bg-white dark:bg-[#1a1a1a] border border-black/10 dark:border-white/10 text-gray-900 dark:text-white focus:outline-none focus:border-pink-500 focus:ring-1 focus:ring-pink-500 shadow-sm"
+                />
               </div>
-              <input
-                type="text"
-                placeholder="Buscar repositório..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-11 pr-4 py-3 rounded-xl bg-white dark:bg-[#1a1a1a] border border-black/10 dark:border-white/10 text-gray-900 dark:text-white focus:outline-none focus:border-pink-500 focus:ring-1 focus:ring-pink-500 shadow-sm"
+
+              <FilterDropdown
+                filterStats={filterStats}
+                activeFilter={activeFilter}
+                setActiveFilter={setActiveFilter}
+                isOpen={isDropdownOpen}
+                setIsOpen={setIsDropdownOpen}
               />
             </div>
 
-            <div className="flex overflow-x-auto pb-4 mb-8 gap-3 snap-x justify-start md:justify-center [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-              {languages.map((lang) => (
-                <button
-                  key={lang}
-                  onClick={() => setActiveFilter(lang)}
-                  className={`shrink-0 snap-start px-6 py-2 rounded-full font-medium text-sm ${
-                    activeFilter === lang
-                      ? "bg-pink-600 text-white shadow-[0_0_15px_rgba(219,39,119,0.4)]"
-                      : "bg-white dark:bg-white/5 border border-black/10 dark:border-white/10 text-gray-700 dark:text-gray-300 hover:border-pink-500 hover:text-pink-500"
-                  }`}
-                >
-                  {lang}
-                </button>
-              ))}
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 min-h-62.5">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 min-h-62.5 relative z-10">
               <AnimatePresence mode="wait">
                 {filteredRepos.length > 0 ? (
                   filteredRepos.map((repo) => (
-                    <motion.a
-                      href={repo.html_url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      initial={{ opacity: 0, y: 15 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -15 }}
-                      transition={{ duration: 0.3 }}
-                      key={repo.id}
-                      className="bg-white dark:bg-[#1a1a1a] p-6 rounded-2xl border border-black/10 dark:border-white/10 flex flex-col hover:border-pink-500/50 hover:shadow-xl dark:hover:shadow-[0_0_20px_rgba(209,47,122,0.15)] hover:-translate-y-1 group cursor-pointer"
-                    >
-                      <div className="flex justify-between items-start mb-4">
-                        <h3
-                          className="text-lg font-bold text-gray-900 dark:text-white group-hover:text-pink-600 dark:group-hover:text-pink-500 wrap-break-word line-clamp-1"
-                          title={repo.name}
-                        >
-                          {repo.name}
-                        </h3>
-                        <FaGithub className="text-gray-400 text-xl shrink-0 group-hover:text-pink-500" />
-                      </div>
-
-                      <p className="text-sm text-gray-600 dark:text-gray-400 mb-6 grow line-clamp-3">
-                        {repo.description || "Nenhuma descrição fornecida."}
-                      </p>
-
-                      <div className="flex items-center justify-between mt-auto pt-4 border-t border-black/5 dark:border-white/5">
-                        <div className="flex items-center gap-2">
-                          {repo.language && (
-                            <>
-                              <span
-                                className={`w-3 h-3 rounded-full ${getLanguageColor(repo.language)}`}
-                              ></span>
-                              <span className="text-xs font-medium text-gray-700 dark:text-gray-300">
-                                {repo.language}
-                              </span>
-                            </>
-                          )}
-                        </div>
-
-                        <div className="flex gap-3 text-gray-500 text-xs font-medium">
-                          <span className="flex items-center gap-1 group-hover:text-yellow-500">
-                            <FaStar /> {repo.stargazers_count}
-                          </span>
-                        </div>
-                      </div>
-                    </motion.a>
+                    <RepoCard key={repo.id} repo={repo} />
                   ))
                 ) : (
                   <motion.div
