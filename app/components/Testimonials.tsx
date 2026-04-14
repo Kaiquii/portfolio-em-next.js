@@ -29,6 +29,14 @@ const recommendations = [
     text: "Trabalhar com Kaiqui Lucas é ter a certeza de que a experiência do usuário estará em boas mãos. Ele une técnica e sensibilidade de design de uma forma rara de se encontrar: transforma ideias em interfaces funcionais, leves e com atenção a cada detalhe. Com domínio de React, TypeScript, Tailwind e boas práticas de arquitetura, Kaiqui entrega mais do que código — entrega experiências. É meticuloso com performance, acessibilidade e usabilidade, sempre buscando a melhor forma de comunicar o que está na tela com clareza e propósito. Além disso, tem um espírito de equipe exemplar: está sempre disposto a ajudar, ouvir, revisar e compartilhar conhecimento. Sua forma colaborativa eleva o nível de todos ao redor. Um profissional que entende que design e código caminham juntos — e faz isso com excelência. Qualquer time que conte com o Kaiqui tem muito a ganhar.",
     featured: false,
   },
+  {
+    name: "Matheus Brito ",
+    role: "Desenvolvedor de Software Full-Stack",
+    company: "CPortal",
+    img: "/img/matheus-brito.jpg",
+    text: "Recomendação para Kaiqui Lucas: Tive o prazer de trabalhar com o Kaiqui durante o período em que ele atuou como estagiário de Suporte Técnico. Desde o início, ele se destacou pelo interesse genuíno em aprender e se desenvolver. Sempre demonstrou proatividade, curiosidade técnica e disposição para ajudar os colegas — qualidades que, sem dúvida, farão diferença em sua trajetória profissional. É nítido que ele busca crescer continuamente, absorvendo feedbacks e buscando novas formas de melhorar. Com certeza tem um futuro promissor pela frente!",
+    featured: false,
+  },
 ];
 
 export default function Testimonials() {
