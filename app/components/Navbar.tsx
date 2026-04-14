@@ -30,6 +30,7 @@ export default function Navbar() {
     { name: "Home", href: "#person" },
     { name: "Sobre", href: "#about" },
     { name: "Projetos", href: "#projects" },
+    { name: "Repositórios", href: "#github-repos" },
     { name: "Recomendações", href: "#testimonials" },
     { name: "Contatos", href: "#contacts" },
   ];
