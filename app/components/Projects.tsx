@@ -115,10 +115,14 @@ export default function Projects() {
   return (
     <section
       id="projects"
-      className="py-20 relative bg-linear-to-br from-gray-50 to-gray-100 dark:from-black dark:to-[#1a1a1a]"
+      className="py-24 relative bg-white/55 dark:bg-[#07070a]/80 border-y border-black/5 dark:border-white/5 overflow-hidden"
     >
+      <div className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-blue-500/30 to-transparent" />
       <div className="max-w-350 mx-auto px-6">
         <div className="text-center mb-16">
+          <span className="inline-flex rounded-full border border-pink-500/20 bg-pink-500/10 px-4 py-2 text-sm font-bold text-pink-700 dark:text-pink-300 mb-5">
+            Portfólio em destaque
+          </span>
           <h2 className="text-4xl lg:text-5xl font-bold bg-linear-to-r from-pink to-blue bg-clip-text text-transparent mb-4">
             Meus Projetos
           </h2>
@@ -180,19 +184,24 @@ export default function Projects() {
           >
             {projects.map((project) => (
               <SwiperSlide key={project.id} className="h-auto">
-                <div className="bg-white dark:bg-[#1a1a1a] border border-black/10 dark:border-white/10 rounded-2xl overflow-hidden hover:border-pink/50 dark:hover:border-pink/30 shadow-md dark:shadow-none hover:shadow-[0_0_20px_rgba(209,47,122,0.15)] dark:hover:shadow-[0_0_20px_rgba(209,47,122,0.2)] group h-full flex flex-col">
-                  <div className="relative h-55 w-full overflow-hidden border-b border-black/5 dark:border-white/5">
+                <div className="bg-white/90 dark:bg-[#111216]/95 border border-black/10 dark:border-white/10 rounded-lg overflow-hidden hover:border-pink/35 dark:hover:border-pink/25 shadow-md shadow-black/5 dark:shadow-none hover:shadow-lg dark:hover:shadow-[0_0_12px_rgba(209,47,122,0.12)] group h-full flex flex-col backdrop-blur">
+                  <div className="relative h-56 w-full overflow-hidden border-b border-black/5 dark:border-white/5">
                     <Image
                       src={project.img}
                       alt={project.title}
                       fill
-                      className="object-cover group-hover:scale-110"
+                      sizes="(min-width: 1024px) 33vw, (min-width: 700px) 50vw, 100vw"
+                      className="object-cover group-hover:scale-[1.02]"
+                      unoptimized
                     />
-                    <div className="absolute inset-0 bg-white/60 dark:bg-black/60 opacity-0 group-hover:opacity-100 flex items-center justify-center backdrop-blur-sm">
+                    <div className="absolute inset-x-0 bottom-0 h-24 bg-linear-to-t from-black/65 to-transparent opacity-70" />
+                    <div className="absolute inset-0 bg-white/55 dark:bg-black/60 opacity-0 group-hover:opacity-100 flex items-center justify-center backdrop-blur-sm">
                       <Link
                         href={project.live}
                         target="_blank"
-                        className="text-gray-900 dark:text-white text-3xl hover:text-pink dark:hover:text-pink hover:scale-125"
+                        rel="noopener noreferrer"
+                        aria-label={`Abrir ${project.title}`}
+                        className="text-gray-900 dark:text-white text-3xl hover:text-pink dark:hover:text-pink"
                       >
                         <FaExternalLinkAlt />
                       </Link>
@@ -223,14 +232,16 @@ export default function Projects() {
                       <Link
                         href={project.repo}
                         target="_blank"
-                        className="flex-1 py-3 rounded-xl bg-gray-100 dark:bg-white/5 border border-black/10 dark:border-white/10 text-center text-sm font-bold text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-white/10 flex items-center justify-center gap-2"
+                        rel="noopener noreferrer"
+                        className="flex-1 py-3 rounded-lg bg-gray-100 dark:bg-white/5 border border-black/10 dark:border-white/10 text-center text-sm font-bold text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-white/10 flex items-center justify-center gap-2"
                       >
                         <FaGithub size={16} /> Código
                       </Link>
                       <Link
                         href={project.live}
                         target="_blank"
-                        className="flex-1 py-3 rounded-xl bg-linear-to-r from-pink to-blue text-center text-sm font-bold text-white hover:shadow-[0_0_15px_rgba(209,47,122,0.3)] dark:hover:shadow-[0_0_15px_rgba(209,47,122,0.4)] flex items-center justify-center gap-2"
+                        rel="noopener noreferrer"
+                        className="flex-1 py-3 rounded-lg bg-linear-to-r from-pink to-blue text-center text-sm font-bold text-white hover:shadow-md hover:shadow-pink-500/15 flex items-center justify-center gap-2"
                       >
                         <FaExternalLinkAlt size={14} /> Ver Site
                       </Link>

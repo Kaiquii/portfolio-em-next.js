@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { Menu, X } from "lucide-react";
 import ThemeToggle from "./ui/ThemeToogle";
 
 export default function Navbar() {
@@ -37,78 +38,64 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 ${
-        scrolled
-          ? "bg-white/95 dark:bg-black/95 backdrop-blur-md shadow-lg py-3 border-b border-black/5 dark:border-white/5"
-          : "bg-transparent py-5"
-      }`}
+      className="fixed top-0 left-0 right-0 z-[9999] px-4 pt-4"
     >
-      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
+      <div
+        className={`max-w-7xl mx-auto h-15 px-4 sm:px-5 flex items-center justify-between rounded-lg border backdrop-blur-xl ${
+          scrolled
+            ? "bg-white/88 dark:bg-black/78 border-black/10 dark:border-white/10 shadow-md shadow-black/5"
+            : "bg-white/55 dark:bg-black/35 border-black/5 dark:border-white/5"
+        }`}
+      >
         <Link
           href="/"
-          className="text-2xl font-bold hover:text-pink z-50 text-black dark:text-white"
+          className="inline-flex items-center gap-2 text-xl sm:text-2xl font-bold z-[10000] text-black dark:text-white hover:text-pink"
+          aria-label="Ir para o início"
         >
-          <h1>kaiqui.dev</h1>
+          <span className="h-2.5 w-2.5 rounded-full bg-linear-to-br from-pink-500 to-blue-600 shadow-[0_0_10px_rgba(209,47,122,0.45)]" />
+          <span>kaiqui.dev</span>
         </Link>
 
-        <nav className="hidden lg:block">
-          <ul className="flex gap-8">
+        <nav className="hidden lg:block" aria-label="Navegação principal">
+          <ul className="flex items-center gap-1 rounded-lg border border-black/5 bg-black/[0.03] p-1 dark:border-white/5 dark:bg-white/[0.04]">
             {navLinks.map((item) => (
               <li key={item.name}>
                 <Link
                   href={item.href}
-                  className="text-black dark:text-white text-base font-medium hover:text-pink dark:hover:text-pink relative group py-2"
+                  className="relative block rounded-md px-3 py-2 text-sm font-semibold text-gray-700 hover:bg-pink-500/10 hover:text-pink-600 dark:text-gray-200 dark:hover:text-pink-300"
                 >
                   {item.name}
-                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-pink group-hover:w-full"></span>
                 </Link>
               </li>
             ))}
           </ul>
         </nav>
 
-        <div className="flex items-center gap-4 z-50">
+        <div className="flex items-center gap-4 z-[10000]">
           <ThemeToggle />
 
           <button
-            className="lg:hidden flex flex-col justify-around w-10 h-10 p-2 relative focus:outline-none"
+            className="lg:hidden inline-flex w-10 h-10 items-center justify-center rounded-lg border border-black/10 bg-white/70 text-gray-900 hover:border-pink-500/40 hover:text-pink-600 dark:border-white/10 dark:bg-white/5 dark:text-white dark:hover:text-pink-300"
             onClick={() => setIsOpen(!isOpen)}
             aria-label="Abrir Menu"
+            aria-expanded={isOpen}
           >
-            <span
-              className={`block w-full h-0.75 rounded ${
-                isOpen
-                  ? "rotate-45 translate-y-2.5 bg-pink"
-                  : "bg-black dark:bg-white"
-              }`}
-            />
-            <span
-              className={`block w-full h-0.75 rounded ${
-                isOpen ? "opacity-0" : "bg-black dark:bg-white"
-              }`}
-            />
-            <span
-              className={`block w-full h-0.75 rounded ${
-                isOpen
-                  ? "-rotate-45 -translate-y-2.5 bg-pink"
-                  : "bg-black dark:bg-white"
-              }`}
-            />
+            {isOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>
 
         <div
-          className={`fixed top-0 left-0 w-full h-dvh bg-white dark:bg-black flex flex-col items-center justify-center gap-8 lg:hidden z-40 ${
+          className={`fixed left-4 right-4 top-22 rounded-lg border border-black/10 bg-white/95 p-4 shadow-xl shadow-black/10 backdrop-blur-xl dark:border-white/10 dark:bg-black/90 lg:hidden z-[9998] ${
             isOpen
-              ? "opacity-100 visible"
-              : "opacity-0 invisible pointer-events-none"
+              ? "opacity-100 visible translate-y-0"
+              : "opacity-0 invisible pointer-events-none -translate-y-2"
           }`}
         >
           {navLinks.map((item) => (
             <Link
               key={item.name}
               href={item.href}
-              className="text-2xl font-bold text-black dark:text-white hover:text-pink dark:hover:text-pink"
+              className="block rounded-md px-4 py-3 text-base font-bold text-black hover:bg-pink-500/10 hover:text-pink-600 dark:text-white dark:hover:text-pink-300"
               onClick={() => setIsOpen(false)}
             >
               {item.name}

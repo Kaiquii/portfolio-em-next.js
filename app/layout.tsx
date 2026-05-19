@@ -36,7 +36,7 @@ export default function RootLayout({
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
         />
-        <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
+        <link rel="apple-touch-icon" href="/icons/icon-192x192.jpg" />
 
         <script
           dangerouslySetInnerHTML={{
@@ -53,7 +53,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${poppins.variable} antialiased bg-gray-50 text-black dark:bg-black dark:text-white`}
+        className={`${poppins.variable} antialiased text-black dark:text-white`}
       >
         <ThemeProvider>{children}</ThemeProvider>
       </body>

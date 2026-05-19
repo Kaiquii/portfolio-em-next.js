@@ -69,10 +69,14 @@ export default function GithubSection() {
   return (
     <section
       id="github-repos"
-      className="py-20 relative bg-gray-50 dark:bg-[#0a0a0a]"
+      className="py-24 relative bg-white/70 dark:bg-black/30 overflow-hidden"
     >
+      <div className="absolute left-0 top-24 h-72 w-1/2 bg-[linear-gradient(90deg,rgba(209,47,122,0.08),transparent)] pointer-events-none" />
       <div className="max-w-350 mx-auto px-6">
         <div className="text-center mb-10">
+          <span className="inline-flex rounded-full border border-blue-500/20 bg-blue-500/10 px-4 py-2 text-sm font-bold text-blue-700 dark:text-blue-300 mb-5">
+            GitHub ao vivo
+          </span>
           <h2 className="text-4xl lg:text-5xl font-bold bg-linear-to-r from-pink-500 to-blue-600 bg-clip-text text-transparent mb-4">
             Repositórios Recentes
           </h2>
@@ -94,7 +98,9 @@ export default function GithubSection() {
           </div>
         ) : (
           <div>
-            <div className="flex flex-col md:flex-row gap-4 justify-center max-w-2xl mx-auto mb-10">
+            <div
+              className="relative z-50 flex flex-col md:flex-row gap-4 justify-center max-w-2xl mx-auto mb-10 rounded-lg border border-black/10 bg-white/75 p-3 shadow-md shadow-black/5 backdrop-blur dark:border-white/10 dark:bg-white/5 dark:shadow-none"
+            >
               <div className="relative w-full md:w-1/2">
                 <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                   <FaSearch className="text-gray-400" />
@@ -104,7 +110,7 @@ export default function GithubSection() {
                   placeholder="Buscar repositório..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-11 pr-4 py-3 rounded-xl bg-white dark:bg-[#1a1a1a] border border-black/10 dark:border-white/10 text-gray-900 dark:text-white focus:outline-none focus:border-pink-500 focus:ring-1 focus:ring-pink-500 shadow-sm"
+                  className="w-full pl-11 pr-4 py-3 rounded-lg bg-white dark:bg-[#1a1a1a] border border-black/10 dark:border-white/10 text-gray-900 dark:text-white focus:outline-none focus:border-pink-500 focus:ring-1 focus:ring-pink-500 shadow-sm"
                 />
               </div>
 
@@ -117,8 +123,8 @@ export default function GithubSection() {
               />
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 min-h-62.5 relative z-10">
-              <AnimatePresence mode="wait">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 min-h-62.5 relative z-0">
+              <AnimatePresence>
                 {filteredRepos.length > 0 ? (
                   filteredRepos.map((repo) => (
                     <RepoCard key={repo.id} repo={repo} />
@@ -141,7 +147,7 @@ export default function GithubSection() {
                 href="https://github.com/Kaiquii?tab=repositories"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-8 py-3 rounded-full bg-gray-100 dark:bg-white/5 border border-black/10 dark:border-white/10 text-gray-900 dark:text-white font-bold hover:bg-gray-200 dark:hover:bg-white/10 hover:border-pink-500 hover:text-pink-500"
+                className="inline-flex items-center gap-2 px-8 py-3 rounded-lg bg-gray-100 dark:bg-white/5 border border-black/10 dark:border-white/10 text-gray-900 dark:text-white font-bold hover:bg-gray-200 dark:hover:bg-white/10 hover:border-pink-500/50 hover:text-pink-500"
               >
                 <FaCodeBranch /> Ver todos no GitHub
               </a>

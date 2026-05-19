@@ -43,8 +43,9 @@ export default function Testimonials() {
   return (
     <section
       id="testimonials"
-      className="py-20 bg-linear-to-br from-white to-gray-50 dark:from-[#0a0a0a] dark:to-[#1a1a1a] relative"
+      className="py-24 bg-white/55 dark:bg-[#07070a]/80 relative border-y border-black/5 dark:border-white/5 overflow-hidden"
     >
+      <div className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-blue-500/30 to-transparent" />
       <div className="max-w-350 mx-auto px-6 relative z-10">
         <div className="text-center mb-16">
           <div className="flex items-center justify-center gap-4 mb-4">
@@ -64,11 +65,11 @@ export default function Testimonials() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.2 }}
-              className={`bg-white dark:bg-[#1a1a1a] p-8 rounded-3xl border ${
+              className={`bg-white/90 dark:bg-[#111216] p-8 rounded-lg border backdrop-blur ${
                 rec.featured
                   ? "border-pink-500/50 shadow-[0_0_30px_rgba(209,47,122,0.1)]"
                   : "border-black/10 dark:border-white/10"
-              } hover:border-pink-500/50 dark:hover:border-pink-500/50 shadow-sm dark:shadow-none hover:shadow-xl group`}
+              } hover:border-pink-500/35 dark:hover:border-pink-500/35 shadow-md shadow-black/5 dark:shadow-none hover:shadow-lg group`}
             >
               <div className="flex justify-between items-start mb-6">
                 <i className="fa-solid fa-quote-left text-4xl text-pink-400 dark:text-pink-500/70"></i>
@@ -91,6 +92,7 @@ export default function Testimonials() {
                     width={50}
                     height={50}
                     className="rounded-full w-full h-full object-cover border-2 border-white dark:border-black"
+                    unoptimized
                   />
                 </div>
                 <div>
@@ -113,7 +115,8 @@ export default function Testimonials() {
           <Link
             href="https://www.linkedin.com/in/kaiqui-lucas/details/recommendations/?detailScreenTabIndex=0"
             target="_blank"
-            className="inline-flex items-center gap-3 px-8 py-3 rounded-full bg-[#0077B5] text-white font-bold hover:shadow-[0_10px_30px_rgba(0,119,181,0.3)] hover:-translate-y-1"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-3 px-8 py-3 rounded-lg bg-[#0077B5] text-white font-bold hover:shadow-md hover:shadow-[#0077B5]/20 hover:-translate-y-0.5"
           >
             <i className="fa-brands fa-linkedin"></i> Ver todas no LinkedIn
           </Link>

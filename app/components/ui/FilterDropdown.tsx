@@ -29,10 +29,11 @@ export default function FilterDropdown({
     filterStats.find((f) => f.name === activeFilter)?.count || 0;
 
   return (
-    <div className="relative w-full md:w-1/2 z-30">
+    <div className="relative z-[60] w-full md:w-1/2">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full px-4 py-3 rounded-xl bg-white dark:bg-[#1a1a1a] border border-black/10 dark:border-white/10 text-gray-900 dark:text-white flex items-center justify-between hover:border-pink-500 shadow-sm focus:outline-none"
+        aria-expanded={isOpen}
+        className="w-full px-4 py-3 rounded-lg bg-white dark:bg-[#1a1a1a] border border-black/10 dark:border-white/10 text-gray-900 dark:text-white flex items-center justify-between hover:border-pink-500/50 shadow-sm focus:outline-none"
       >
         <div className="flex items-center gap-2">
           <span className="text-gray-500 dark:text-gray-400">Linguagem:</span>
@@ -53,7 +54,7 @@ export default function FilterDropdown({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
-            className="absolute w-full mt-2 bg-white dark:bg-[#1a1a1a] border border-black/10 dark:border-white/10 rounded-xl shadow-xl overflow-hidden max-h-64 overflow-y-auto z-40 [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-thumb]:bg-gray-700 [&::-webkit-scrollbar-thumb]:rounded-full"
+            className="absolute z-[70] w-full mt-3 bg-white dark:bg-[#1a1a1a] border border-black/10 dark:border-white/10 rounded-lg shadow-lg overflow-hidden max-h-64 overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-thumb]:bg-gray-700 [&::-webkit-scrollbar-thumb]:rounded-full"
           >
             {filterStats.map((filter) => (
               <button

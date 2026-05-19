@@ -19,7 +19,7 @@ export default function RepoCard({ repo }: RepoCardProps) {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -15 }}
       transition={{ duration: 0.3 }}
-      className="bg-white dark:bg-[#1a1a1a] p-6 rounded-2xl border border-black/10 dark:border-white/10 flex flex-col hover:border-pink-500/50 hover:shadow-xl dark:hover:shadow-[0_0_20px_rgba(209,47,122,0.15)] group cursor-pointer"
+      className="bg-white/90 dark:bg-[#111216] p-6 rounded-lg border border-black/10 dark:border-white/10 flex flex-col hover:border-pink-500/35 hover:-translate-y-0.5 hover:shadow-md dark:hover:shadow-[0_0_10px_rgba(209,47,122,0.12)] group cursor-pointer backdrop-blur"
     >
       <div className="flex justify-between items-start mb-4">
         <h3
