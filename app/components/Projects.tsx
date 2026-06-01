@@ -18,6 +18,15 @@ import "swiper/css/navigation";
 const projects = [
   {
     id: 1,
+    title: "App Financeiro Web",
+    img: "/img/app-financeiro-web.png",
+    desc: "Gerencie suas finanças com praticidade, conectada a uma API Rest em Go para controle total dos seus gastos.",
+    tags: ["API Rest", "TypeScript", "Next.JS", "GO"],
+    repo: "https://github.com/Kaiquii/App-Financeiro-Web.git",
+    live: "https://app-financeiro-web.netlify.app/login",
+  },
+  {
+    id: 2,
     title: "Site Motoboy - Chama o Boy",
     img: "/img/site-motoboy.png",
     desc: "Otimizado para o trabalho de duas rodas, formulario com envio no WhatsApp",
@@ -26,7 +35,7 @@ const projects = [
     live: "https://chama-o-boy.vercel.app",
   },
   {
-    id: 2,
+    id: 3,
     title: "Consulta Fipe",
     img: "/img/projeto-fipe.png",
     desc: "Consulta a fipe do seu carro cum essa aplicação moderna e responsiva",
@@ -35,7 +44,7 @@ const projects = [
     live: "https://consulta-fipe.vercel.app",
   },
   {
-    id: 3,
+    id: 4,
     title: "Calculadora de IMC",
     img: "/img/projeto-imc.png",
     desc: "Calculadora moderna com NextJS e Tailwind. Interface intuitiva para controle de saúde.",
@@ -44,7 +53,7 @@ const projects = [
     live: "https://imc-next.vercel.app",
   },
   {
-    id: 4,
+    id: 5,
     title: "Pet Shop - DEV",
     img: "/img/petdev.png",
     desc: "E-commerce completo para petshop com sistema de carrinho e checkout.",
@@ -53,7 +62,7 @@ const projects = [
     live: "https://petdev-ten.vercel.app",
   },
   {
-    id: 5,
+    id: 6,
     title: "Starbucks® Clone",
     img: "/img/starbucks-foto.png",
     desc: "Landing page responsiva inspirada no Starbucks® com foco em UI/UX.",
@@ -62,7 +71,7 @@ const projects = [
     live: "https://cheery-strudel-5e916f.netlify.app",
   },
   {
-    id: 6,
+    id: 7,
     title: "Agência Awax",
     img: "/img/awaw.png",
     desc: "Template de agência criativa com layout responsivo e moderno.",
@@ -71,7 +80,7 @@ const projects = [
     live: "https://projetoo-awax.netlify.app/",
   },
   {
-    id: 7,
+    id: 8,
     title: "Loja de Roupas",
     img: "/img/loja-roupas.png",
     desc: "E-commerce de moda com catálogo de produtos e filtros dinâmicos.",
@@ -80,7 +89,7 @@ const projects = [
     live: "https://loja-roupas-proj.netlify.app/",
   },
   {
-    id: 8,
+    id: 9,
     title: "Medicenter",
     img: "/img/medicenter.png",
     desc: "Website institucional para clínica médica focado em agendamentos.",
@@ -89,7 +98,7 @@ const projects = [
     live: "https://templete-medicenter-b7web.netlify.app/",
   },
   {
-    id: 9,
+    id: 10,
     title: "Pizzaria Delivery",
     img: "/img/pizzaria-proj.png",
     desc: "Site de delivery de pizzaria com cardápio interativo e carrinho.",
@@ -98,7 +107,7 @@ const projects = [
     live: "https://proj-pizzaria-b7web.netlify.app/",
   },
   {
-    id: 10,
+    id: 11,
     title: "Cadastro de Produtos",
     img: "/img/proj-cadastro.png",
     desc: "Sistema CRUD completo para gestão de produtos e estoque.",
