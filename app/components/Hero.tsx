@@ -67,7 +67,7 @@ export default function Hero() {
           initial={false}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
-          className="mb-6 max-w-2xl lg:max-w-[42rem]"
+          className="mb-6 max-w-2xl lg:max-w-2xl"
         >
           <span className="inline-flex items-center gap-2 rounded-full border border-pink-500/20 bg-white/70 px-3 py-1.5 text-xs font-bold text-pink-700 shadow-sm backdrop-blur dark:bg-white/5 dark:text-pink-300 dark:shadow-none">
             <span className="h-2 w-2 rounded-full bg-green-500 shadow-[0_0_12px_rgba(34,197,94,0.8)]" />
@@ -189,7 +189,7 @@ export default function Hero() {
           <div className="relative mb-6 cursor-pointer">
             <div className="absolute -inset-4 rounded-full border border-pink-500/20 dark:border-pink-500/30" />
             <div className="absolute -inset-1.5 rounded-full border border-blue-500/20 dark:border-blue-500/30" />
-            <div className="relative w-68 h-68 overflow-hidden rounded-full p-1 bg-linear-to-tr from-orange-400 via-pink-500 to-blue-600 animate-[profileGlow_4s_ease-in-out_infinite] shadow-2xl sm:w-76 sm:h-76 lg:w-[22rem] lg:h-[22rem]">
+            <div className="relative w-68 h-68 overflow-hidden rounded-full p-1 bg-linear-to-tr from-orange-400 via-pink-500 to-blue-600 animate-[profileGlow_4s_ease-in-out_infinite] shadow-2xl sm:w-76 sm:h-76 lg:w-88 lg:h-88">
               <div className="relative h-full w-full overflow-hidden rounded-full border border-white/60 bg-white dark:border-white/10 dark:bg-black">
                 <Image
                   src="/img/foto-kaiqui.png"
