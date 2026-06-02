@@ -13,7 +13,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="bg-white/80 dark:bg-[#050506] pt-16 pb-8 border-t border-black/5 dark:border-white/5 relative overflow-hidden">
+    <footer className="bg-white/80 dark:bg-[#050506] pt-10 pb-6 border-t border-black/5 dark:border-white/5 relative overflow-hidden">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_80%,rgba(209,47,122,0.02),transparent_50%)] dark:bg-[radial-gradient(circle_at_20%_80%,rgba(209,47,122,0.05),transparent_50%)] pointer-events-none" />
 
       <div className="max-w-300 mx-auto px-6 relative z-10">

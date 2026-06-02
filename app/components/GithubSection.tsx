@@ -69,7 +69,7 @@ export default function GithubSection() {
   return (
     <section
       id="github-repos"
-      className="py-24 relative bg-white/70 dark:bg-black/30 overflow-hidden"
+      className="pt-12 pb-12 lg:pt-14 lg:pb-14 relative bg-white/70 dark:bg-black/30 overflow-hidden"
     >
       <div className="absolute left-0 top-24 h-72 w-1/2 bg-[linear-gradient(90deg,rgba(209,47,122,0.08),transparent)] pointer-events-none" />
       <div className="max-w-350 mx-auto px-6">

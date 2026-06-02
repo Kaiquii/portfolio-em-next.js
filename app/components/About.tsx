@@ -49,7 +49,7 @@ export default function About() {
   return (
     <section
       id="about"
-      className="py-24 bg-white/70 dark:bg-black/30 relative overflow-hidden border-y border-black/5 dark:border-white/5"
+      className="pt-12 pb-12 lg:pt-14 lg:pb-14 bg-white/70 dark:bg-black/30 relative overflow-hidden border-y border-black/5 dark:border-white/5"
     >
       <div className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-pink-500/30 to-transparent" />
       <div className="absolute right-0 top-24 h-80 w-1/3 bg-[linear-gradient(90deg,transparent,rgba(7,63,204,0.08))] pointer-events-none" />

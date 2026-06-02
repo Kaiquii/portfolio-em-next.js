@@ -43,7 +43,7 @@ export default function Testimonials() {
   return (
     <section
       id="testimonials"
-      className="py-24 bg-white/55 dark:bg-[#07070a]/80 relative border-y border-black/5 dark:border-white/5 overflow-hidden"
+      className="pt-12 pb-12 lg:pt-14 lg:pb-14 bg-white/55 dark:bg-[#07070a]/80 relative border-y border-black/5 dark:border-white/5 overflow-hidden"
     >
       <div className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-blue-500/30 to-transparent" />
       <div className="max-w-350 mx-auto px-6 relative z-10">
