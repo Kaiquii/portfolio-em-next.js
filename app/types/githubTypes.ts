@@ -7,4 +7,7 @@ export interface GithubRepo {
   stargazers_count: number;
   fork: boolean;
   updated_at: string;
+  pushed_at: string;
+  forks_count?: number;
+  open_issues_count?: number;
 }

@@ -32,10 +32,6 @@ export default function RootLayout({
   return (
     <html lang="pt-br" className="scroll-smooth dark">
       <head>
-        <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-        />
         <link rel="apple-touch-icon" href="/icons/icon-192x192.jpg" />
 
         <script

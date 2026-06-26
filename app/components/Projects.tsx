@@ -5,12 +5,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper/modules";
 import Image from "next/image";
 import Link from "next/link";
-import {
-  FaGithub,
-  FaExternalLinkAlt,
-  FaChevronLeft,
-  FaChevronRight,
-} from "react-icons/fa";
+import { ChevronLeft, ChevronRight, ExternalLink, Sparkles } from "lucide-react";
+import { FaGithub } from "react-icons/fa";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
@@ -20,8 +16,10 @@ const projects = [
     id: 1,
     title: "App Financeiro Web",
     img: "/img/app-financeiro-web.png",
-    desc: "Gerencie suas finanças com praticidade, conectada a uma API Rest em Go para controle total dos seus gastos.",
-    tags: ["API Rest", "TypeScript", "Next.JS", "GO"],
+    desc: "Plataforma financeira web com autenticação, dashboards e API REST em Go para controle completo de receitas, despesas e metas.",
+    tags: ["Next.js", "TypeScript", "Go", "API REST"],
+    category: "Projeto principal",
+    featured: true,
     repo: "https://github.com/Kaiquii/App-Financeiro-Web.git",
     live: "https://app-financeiro-web.netlify.app/login",
   },
@@ -29,8 +27,9 @@ const projects = [
     id: 2,
     title: "Site Motoboy - Chama o Boy",
     img: "/img/site-motoboy.png",
-    desc: "Otimizado para o trabalho de duas rodas, formulario com envio no WhatsApp",
-    tags: ["API Rest", "TypeScript", "Next.JS"],
+    desc: "Landing page responsiva para corridas e entregas, com formulário direto para WhatsApp e foco em conversão rápida.",
+    tags: ["Next.js", "TypeScript", "WhatsApp"],
+    category: "Negócio local",
     repo: "https://github.com/Kaiquii/site-motoboy-nextjs.git",
     live: "https://chama-o-boy.vercel.app",
   },
@@ -38,8 +37,9 @@ const projects = [
     id: 3,
     title: "Consulta Fipe",
     img: "/img/projeto-fipe.png",
-    desc: "Consulta a fipe do seu carro cum essa aplicação moderna e responsiva",
-    tags: ["API Rest", "TypeScript", "Next.JS"],
+    desc: "Aplicação moderna para consultar a Tabela Fipe de carros, motos e caminhões usando dados de API externa.",
+    tags: ["Next.js", "TypeScript", "API REST"],
+    category: "Integração API",
     repo: "https://github.com/Kaiquii/consulta-fipe.git",
     live: "https://consulta-fipe.vercel.app",
   },
@@ -47,8 +47,9 @@ const projects = [
     id: 4,
     title: "Calculadora de IMC",
     img: "/img/projeto-imc.png",
-    desc: "Calculadora moderna com NextJS e Tailwind. Interface intuitiva para controle de saúde.",
-    tags: ["NextJS", "TypeScript", "TailwindCSS"],
+    desc: "Calculadora de IMC com interface simples, responsiva e feedback visual para acompanhar indicadores de saúde.",
+    tags: ["Next.js", "TypeScript", "Tailwind CSS"],
+    category: "Interface web",
     repo: "https://github.com/Kaiquii/imc-next",
     live: "https://imc-next.vercel.app",
   },
@@ -57,16 +58,18 @@ const projects = [
     title: "Pet Shop - DEV",
     img: "/img/petdev.png",
     desc: "E-commerce completo para petshop com sistema de carrinho e checkout.",
-    tags: ["ReactJS", "Node.js", "E-commerce"],
+    tags: ["React", "Node.js", "E-commerce"],
+    category: "E-commerce",
     repo: "https://github.com/Kaiquii/petdev.git",
     live: "https://petdev-ten.vercel.app",
   },
   {
     id: 6,
-    title: "Starbucks® Clone",
+    title: "Starbucks Clone",
     img: "/img/starbucks-foto.png",
-    desc: "Landing page responsiva inspirada no Starbucks® com foco em UI/UX.",
+    desc: "Landing page responsiva inspirada na experiência visual da Starbucks, com foco em layout, cores e apresentação de produto.",
     tags: ["HTML5", "CSS3", "JavaScript"],
+    category: "Landing page",
     repo: "https://github.com/Kaiquii/site-starbucks",
     live: "https://cheery-strudel-5e916f.netlify.app",
   },
@@ -74,8 +77,9 @@ const projects = [
     id: 7,
     title: "Agência Awax",
     img: "/img/awaw.png",
-    desc: "Template de agência criativa com layout responsivo e moderno.",
-    tags: ["HTML5", "CSS3", "Responsive"],
+    desc: "Template de agência criativa com seções institucionais, layout responsivo e composição visual moderna.",
+    tags: ["HTML5", "CSS3", "Responsivo"],
+    category: "Institucional",
     repo: "https://github.com/Kaiquii/Projeto-Awax",
     live: "https://projetoo-awax.netlify.app/",
   },
@@ -83,8 +87,9 @@ const projects = [
     id: 8,
     title: "Loja de Roupas",
     img: "/img/loja-roupas.png",
-    desc: "E-commerce de moda com catálogo de produtos e filtros dinâmicos.",
+    desc: "E-commerce de moda com catálogo de produtos, filtros dinâmicos e experiência pensada para navegação rápida.",
     tags: ["E-commerce", "JavaScript", "UI/UX"],
+    category: "E-commerce",
     repo: "https://github.com/Kaiquii/loja-de-roupas-front-end",
     live: "https://loja-roupas-proj.netlify.app/",
   },
@@ -92,8 +97,9 @@ const projects = [
     id: 9,
     title: "Medicenter",
     img: "/img/medicenter.png",
-    desc: "Website institucional para clínica médica focado em agendamentos.",
-    tags: ["Institucional", "Responsive", "Healthcare"],
+    desc: "Website institucional para clínica médica, com estrutura clara para serviços, informações e agendamentos.",
+    tags: ["Institucional", "Responsivo", "Healthcare"],
+    category: "Institucional",
     repo: "https://github.com/Kaiquii/Templete-medicenter-responsivo",
     live: "https://templete-medicenter-b7web.netlify.app/",
   },
@@ -101,8 +107,9 @@ const projects = [
     id: 10,
     title: "Pizzaria Delivery",
     img: "/img/pizzaria-proj.png",
-    desc: "Site de delivery de pizzaria com cardápio interativo e carrinho.",
+    desc: "Site de delivery para pizzaria com cardápio interativo, carrinho e fluxo pensado para pedidos online.",
     tags: ["Delivery", "WhatsApp API", "Animações"],
+    category: "Delivery",
     repo: "https://github.com/Kaiquii/Projeto-pizzaria",
     live: "https://proj-pizzaria-b7web.netlify.app/",
   },
@@ -110,8 +117,9 @@ const projects = [
     id: 11,
     title: "Cadastro de Produtos",
     img: "/img/proj-cadastro.png",
-    desc: "Sistema CRUD completo para gestão de produtos e estoque.",
+    desc: "Sistema CRUD para gestão de produtos e estoque, com cadastro, listagem e validação de dados no front-end.",
     tags: ["CRUD", "JavaScript", "Validação"],
+    category: "Gestão",
     repo: "https://github.com/Kaiquii/Cadastro-Produto-JS",
     live: "https://cadastro-produtos.netlify.app/",
   },
@@ -136,8 +144,8 @@ export default function Projects() {
             Meus Projetos
           </h2>
           <p className="text-gray-600 dark:text-gray-400 text-lg">
-            Explore alguns dos projetos que desenvolvi para demonstrar minhas
-            habilidades
+            Projetos com foco em produto, integrações, interfaces responsivas e
+            soluções full stack.
           </p>
         </div>
 
@@ -152,7 +160,7 @@ export default function Projects() {
                        disabled:opacity-0 disabled:cursor-not-allowed md:flex"
             aria-label="Anterior"
           >
-            <FaChevronLeft size={20} className="relative -left-0.5" />
+            <ChevronLeft size={20} className="relative -left-0.5" />
           </button>
 
           <button
@@ -165,7 +173,7 @@ export default function Projects() {
                        disabled:opacity-0 disabled:cursor-not-allowed md:flex"
             aria-label="Próximo"
           >
-            <FaChevronRight size={20} className="relative -right-0.5" />
+            <ChevronRight size={20} className="relative -right-0.5" />
           </button>
 
           <Swiper
@@ -193,7 +201,13 @@ export default function Projects() {
           >
             {projects.map((project) => (
               <SwiperSlide key={project.id} className="h-auto">
-                <div className="bg-white/90 dark:bg-[#111216]/95 border border-black/10 dark:border-white/10 rounded-lg overflow-hidden hover:border-pink/35 dark:hover:border-pink/25 shadow-md shadow-black/5 dark:shadow-none hover:shadow-lg dark:hover:shadow-[0_0_12px_rgba(209,47,122,0.12)] group h-full flex flex-col backdrop-blur">
+                <div
+                  className={`bg-white/90 dark:bg-[#111216]/95 border rounded-lg overflow-hidden hover:border-pink/35 dark:hover:border-pink/25 shadow-md shadow-black/5 dark:shadow-none hover:shadow-lg dark:hover:shadow-[0_0_12px_rgba(209,47,122,0.12)] group h-full flex flex-col backdrop-blur ${
+                    project.featured
+                      ? "border-pink-500/45 dark:border-pink-500/35"
+                      : "border-black/10 dark:border-white/10"
+                  }`}
+                >
                   <div className="relative h-56 w-full overflow-hidden border-b border-black/5 dark:border-white/5">
                     <Image
                       src={project.img}
@@ -204,6 +218,17 @@ export default function Projects() {
                       unoptimized
                     />
                     <div className="absolute inset-x-0 bottom-0 h-24 bg-linear-to-t from-black/65 to-transparent opacity-70" />
+                    <div className="absolute left-4 top-4 flex flex-wrap gap-2">
+                      {project.featured && (
+                        <span className="inline-flex items-center gap-1 rounded-full border border-white/25 bg-pink-600 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-white shadow-md">
+                          <Sparkles size={12} />
+                          Destaque
+                        </span>
+                      )}
+                      <span className="rounded-full border border-white/25 bg-black/65 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-white backdrop-blur">
+                        {project.category}
+                      </span>
+                    </div>
                     <div className="absolute inset-0 bg-white/55 dark:bg-black/60 opacity-0 group-hover:opacity-100 flex items-center justify-center backdrop-blur-sm">
                       <Link
                         href={project.live}
@@ -212,7 +237,7 @@ export default function Projects() {
                         aria-label={`Abrir ${project.title}`}
                         className="text-gray-900 dark:text-white text-3xl hover:text-pink dark:hover:text-pink"
                       >
-                        <FaExternalLinkAlt />
+                        <ExternalLink />
                       </Link>
                     </div>
                   </div>
@@ -252,7 +277,7 @@ export default function Projects() {
                         rel="noopener noreferrer"
                         className="flex-1 py-3 rounded-lg bg-linear-to-r from-pink to-blue text-center text-sm font-bold text-white hover:shadow-md hover:shadow-pink-500/15 flex items-center justify-center gap-2"
                       >
-                        <FaExternalLinkAlt size={14} /> Ver Site
+                        <ExternalLink size={14} /> Ver Site
                       </Link>
                     </div>
                   </div>

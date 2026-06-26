@@ -1,7 +1,7 @@
 // components/FilterDropdown.tsx
 "use client";
 
-import { FaChevronDown } from "react-icons/fa";
+import { ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { getLanguageColor } from "../../utils/getLanguageColor";
 
@@ -42,7 +42,8 @@ export default function FilterDropdown({
             {currentCount}
           </span>
         </div>
-        <FaChevronDown
+        <ChevronDown
+          size={16}
           className={`text-gray-400 ${isOpen ? "rotate-180 text-pink-500" : ""}`}
         />
       </button>

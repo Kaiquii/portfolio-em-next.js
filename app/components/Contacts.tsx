@@ -1,103 +1,109 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { Check, Copy, Download, Mail, Send } from "lucide-react";
+import { FaLinkedin, FaWhatsapp } from "react-icons/fa";
 
-const contactMethods = [
-  {
-    title: "WhatsApp",
-    status: "Online agora",
-    desc: "Vamos conversar sobre seu projeto!",
-    btnText: "Iniciar conversa",
-    link: "https://wa.me/5511933673435",
-    icon: "fa-brands fa-whatsapp",
-    colorClass: "from-[#25D366] to-[#128C7E]",
-    shadowColor: "hover:shadow-[#25D366]/15",
-  },
-  {
-    title: "E-mail",
-    status: "Resposta em 24h",
-    desc: "Envie sua proposta por e-mail",
-    btnText: "Enviar e-mail",
-    link: "mailto:kaiqui.lucaskaiquiluc@gmail.com",
-    icon: "fa-solid fa-envelope",
-    colorClass: "from-[#EA4335] to-[#FBBC05]",
-    shadowColor: "hover:shadow-[#EA4335]/15",
-  },
-  {
-    title: "LinkedIn",
-    status: "Conecte-se",
-    desc: "Veja minha experiência profissional",
-    btnText: "Ver perfil",
-    link: "https://www.linkedin.com/in/kaiqui-lucas/",
-    icon: "fa-brands fa-linkedin",
-    colorClass: "from-[#0077B5] to-[#005885]",
-    shadowColor: "hover:shadow-[#0077B5]/15",
-  },
-];
+const email = "kaiqui.lucaskaiquiluc@gmail.com";
 
 export default function Contacts() {
+  const [copied, setCopied] = useState(false);
+
+  const copyEmail = async () => {
+    await navigator.clipboard.writeText(email);
+    setCopied(true);
+    window.setTimeout(() => setCopied(false), 1800);
+  };
+
   return (
     <section
       id="contacts"
-      className="pt-12 pb-12 lg:pt-14 lg:pb-16 bg-white/70 dark:bg-black/30 relative border-t border-black/5 dark:border-white/5 overflow-hidden"
+      className="pt-10 pb-10 lg:pt-12 lg:pb-12 bg-white/70 dark:bg-black/30 relative border-t border-black/5 dark:border-white/5 overflow-hidden"
     >
       <div className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-pink-500/30 to-transparent" />
-      <div className="max-w-300 mx-auto px-6 relative z-10">
-        <div className="text-center mb-16">
-          <h2 className="flex items-center justify-center gap-4 text-4xl lg:text-5xl font-bold bg-linear-to-r from-pink to-blue bg-clip-text text-transparent mb-4">
-            <i className="fa-solid fa-paper-plane text-3xl text-pink-500 drop-shadow-[0_0_10px_rgba(209,47,122,0.35)]"></i>
-            Vamos conversar?
-          </h2>
-          <p className="text-gray-600 dark:text-gray-400 text-lg">
-            Entre em contato comigo através dos canais abaixo
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-          {contactMethods.map((method, index) => (
-            <motion.div
-              key={method.title}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.4, delay: index * 0.1 }}
-              className="bg-white/90 dark:bg-[#111216] p-8 rounded-lg border border-black/10 dark:border-white/10 shadow-md shadow-black/5 dark:shadow-none hover:border-pink-500/35 dark:hover:border-pink-500/25 hover:shadow-lg dark:hover:shadow-[0_0_10px_rgba(209,47,122,0.12)] hover:-translate-y-0.5 group backdrop-blur"
-            >
-              <div className="flex items-center gap-4 mb-6">
-                <div
-                  className={`w-15 h-15 rounded-lg flex items-center justify-center text-2xl text-white bg-linear-to-br ${method.colorClass} group-hover:-translate-y-0.5`}
-                >
-                  <i className={method.icon}></i>
-                </div>
-                <div>
-                  <h3 className="text-gray-900 dark:text-white font-bold text-xl">
-                    {method.title}
-                  </h3>
-                  <span className="text-xs bg-black/5 dark:bg-white/10 text-gray-700 dark:text-gray-300 px-3 py-1 rounded-full">
-                    {method.status}
-                  </span>
-                </div>
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
+        <div className="mx-auto w-full rounded-lg border border-black/10 bg-white/85 p-5 shadow-md shadow-black/5 backdrop-blur dark:border-white/10 dark:bg-[#111216]/90 dark:shadow-none lg:p-6">
+          <div className="grid gap-5 lg:grid-cols-[1fr_auto] lg:items-center">
+            <div className="flex gap-4 text-left">
+              <span className="mt-1 inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-pink-500/10 text-pink-600 dark:bg-pink-500/15 dark:text-pink-300">
+                <Send size={22} aria-hidden="true" />
+              </span>
+              <div>
+                <h2 className="text-3xl font-bold bg-linear-to-r from-pink to-blue bg-clip-text text-transparent sm:text-4xl">
+                  Vamos conversar?
+                </h2>
+                <p className="mt-2 max-w-2xl text-sm leading-relaxed text-gray-600 dark:text-gray-300 sm:text-base">
+                  Estou disponível para oportunidades Full-Stack, Front-End,
+                  Back-End, Mobile e projetos freelance.
+                </p>
               </div>
-              <p className="text-gray-600 dark:text-gray-400 mb-6 min-h-12">
-                {method.desc}
-              </p>
+            </div>
+
+            <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap lg:justify-end">
               <Link
-                href={method.link}
+                href="https://wa.me/5511933673435"
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`flex items-center justify-center gap-2 w-full py-3 rounded-lg bg-linear-to-br ${method.colorClass} text-white font-bold ${method.shadowColor} hover:shadow-md`}
+                className="inline-flex items-center justify-center gap-2 rounded-lg bg-[#25D366] px-4 py-2.5 text-sm font-bold text-white hover:-translate-y-0.5 hover:shadow-md hover:shadow-[#25D366]/20"
               >
-                <i className={method.icon}></i> {method.btnText}
+                <FaWhatsapp size={17} aria-hidden="true" />
+                WhatsApp
               </Link>
-            </motion.div>
-          ))}
-        </div>
+              <Link
+                href={`mailto:${email}`}
+                className="inline-flex items-center justify-center gap-2 rounded-lg bg-linear-to-r from-pink to-blue px-4 py-2.5 text-sm font-bold text-white hover:-translate-y-0.5 hover:shadow-md hover:shadow-pink-500/15"
+              >
+                <Mail size={17} aria-hidden="true" />
+                E-mail
+              </Link>
+              <Link
+                href="https://www.linkedin.com/in/kaiqui-lucas/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 rounded-lg bg-[#0077B5] px-4 py-2.5 text-sm font-bold text-white hover:-translate-y-0.5 hover:shadow-md hover:shadow-[#0077B5]/20"
+              >
+                <FaLinkedin size={17} aria-hidden="true" />
+                LinkedIn
+              </Link>
+              <Link
+                href="/document/CV Dev Kaiqui.pdf"
+                download
+                className="inline-flex items-center justify-center gap-2 rounded-lg border border-black/10 bg-white px-4 py-2.5 text-sm font-bold text-gray-900 hover:-translate-y-0.5 hover:border-pink-500/35 hover:text-pink-600 dark:border-white/10 dark:bg-white/5 dark:text-white dark:hover:text-pink-300"
+              >
+                <Download size={17} aria-hidden="true" />
+                CV
+              </Link>
+            </div>
+          </div>
 
-        <div className="text-center">
-          <p className="inline-flex items-center gap-2 bg-white/80 dark:bg-white/5 border border-black/10 dark:border-white/10 px-8 py-4 rounded-lg text-gray-700 dark:text-gray-400 shadow-sm dark:shadow-none">
-            <i className="fa-solid fa-clock text-pink-600 dark:text-pink-500"></i>
-            Resposta garantida em até 24 horas
-          </p>
+          <div className="mt-4 flex max-w-2xl flex-col items-stretch gap-2 rounded-lg border border-black/10 bg-black/3 p-1.5 dark:border-white/10 dark:bg-white/4 sm:flex-row sm:items-center">
+            <span className="min-w-0 flex-1 truncate px-3 py-1 text-sm font-semibold text-gray-700 dark:text-gray-300">
+              {email}
+            </span>
+            <button
+              type="button"
+              onClick={copyEmail}
+              className={`inline-flex cursor-pointer items-center justify-center gap-2 rounded-md px-3 py-1.5 text-sm font-bold ${
+                copied
+                  ? "bg-emerald-500 text-white"
+                  : "bg-white text-gray-900 hover:bg-gray-100 dark:bg-white/10 dark:text-white dark:hover:bg-white/15"
+              }`}
+              aria-live="polite"
+            >
+              {copied ? (
+                <>
+                  <Check size={16} aria-hidden="true" />
+                  Copiado
+                </>
+              ) : (
+                <>
+                  <Copy size={16} aria-hidden="true" />
+                  Copiar e-mail
+                </>
+              )}
+            </button>
+          </div>
         </div>
       </div>
     </section>

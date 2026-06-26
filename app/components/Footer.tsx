@@ -1,6 +1,8 @@
 "use client";
 
 import Link from "next/link";
+import { Coffee, Heart, Mail } from "lucide-react";
+import { FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -57,9 +59,9 @@ export default function Footer() {
                   href="https://www.linkedin.com/in/kaiqui-lucas/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-600 dark:text-gray-400 hover:text-[#0077B5]"
+                  className="inline-flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-[#0077B5]"
                 >
-                  <i className="fa-brands fa-linkedin w-6"></i> LinkedIn
+                  <FaLinkedin className="w-5" aria-hidden="true" /> LinkedIn
                 </Link>
               </li>
               <li>
@@ -67,9 +69,9 @@ export default function Footer() {
                   href="https://github.com/Kaiquii"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
+                  className="inline-flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
                 >
-                  <i className="fa-brands fa-github w-6"></i> GitHub
+                  <FaGithub className="w-5" aria-hidden="true" /> GitHub
                 </Link>
               </li>
               <li>
@@ -77,17 +79,17 @@ export default function Footer() {
                   href="https://www.instagram.com/kaiqui_luucas/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-600 dark:text-gray-400 hover:text-[#E1306C]"
+                  className="inline-flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-[#E1306C]"
                 >
-                  <i className="fa-brands fa-instagram w-6"></i> Instagram
+                  <FaInstagram className="w-5" aria-hidden="true" /> Instagram
                 </Link>
               </li>
               <li>
                 <Link
                   href="mailto:kaiqui.lucaskaiquiluc@gmail.com"
-                  className="text-gray-600 dark:text-gray-400 hover:text-red-500"
+                  className="inline-flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-red-500"
                 >
-                  <i className="fa-solid fa-envelope w-6"></i> E-mail
+                  <Mail className="w-5" size={18} aria-hidden="true" /> E-mail
                 </Link>
               </li>
             </ul>
@@ -97,8 +99,19 @@ export default function Footer() {
         <div className="border-t border-black/10 dark:border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500">
           <p>© {currentYear} Kaiqui Lucas. Todos os direitos reservados.</p>
           <p className="flex items-center gap-2">
-            Feito com <i className="fa-solid fa-heart text-red-500 animate-pulse"></i> e
-            muito <i className="fa-solid fa-mug-hot text-yellow-600 animate-bounce"></i>
+            Feito com{" "}
+            <Heart
+              className="text-red-500 animate-pulse"
+              size={16}
+              fill="currentColor"
+              aria-hidden="true"
+            />{" "}
+            e muito{" "}
+            <Coffee
+              className="text-yellow-600 animate-bounce"
+              size={16}
+              aria-hidden="true"
+            />
           </p>
         </div>
       </div>

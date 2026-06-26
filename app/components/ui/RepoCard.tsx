@@ -1,6 +1,7 @@
 "use client";
 
-import { FaGithub, FaStar } from "react-icons/fa";
+import { Star } from "lucide-react";
+import { FaGithub } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { GithubRepo } from "../../types/githubTypes";
 import { getLanguageColor } from "../../utils/getLanguageColor";
@@ -51,7 +52,7 @@ export default function RepoCard({ repo }: RepoCardProps) {
 
         <div className="flex gap-3 text-gray-500 text-xs font-medium">
           <span className="flex items-center gap-1 group-hover:text-yellow-500">
-            <FaStar /> {repo.stargazers_count}
+            <Star size={13} fill="currentColor" /> {repo.stargazers_count}
           </span>
         </div>
       </div>

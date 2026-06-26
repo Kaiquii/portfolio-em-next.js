@@ -4,6 +4,8 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { ExternalLink, Quote, Star } from "lucide-react";
+import { FaLinkedin } from "react-icons/fa";
 import Modal from "./ui/Modal";
 
 const recommendations = [
@@ -60,7 +62,7 @@ export default function Testimonials() {
             </h2>
           </div>
           <div className="inline-flex items-center gap-2 bg-[#0077B5] px-4 py-2 rounded-full text-white font-bold text-sm shadow-md">
-            <i className="fa-brands fa-linkedin"></i> <span>LinkedIn</span>
+            <FaLinkedin aria-hidden="true" /> <span>LinkedIn</span>
           </div>
         </div>
 
@@ -81,10 +83,19 @@ export default function Testimonials() {
                 } hover:border-pink-500/35 dark:hover:border-pink-500/35 shadow-md shadow-black/5 dark:shadow-none hover:shadow-lg group`}
               >
                 <div className="flex justify-between items-start mb-5">
-                  <i className="fa-solid fa-quote-left text-3xl text-pink-400 dark:text-pink-500/70"></i>
+                  <Quote
+                    className="text-pink-400 dark:text-pink-500/70"
+                    size={32}
+                    aria-hidden="true"
+                  />
                   <div className="flex gap-1 text-yellow-400 text-sm">
                     {[1, 2, 3, 4, 5].map((star) => (
-                      <i key={star} className="fa-solid fa-star"></i>
+                      <Star
+                        key={star}
+                        size={14}
+                        fill="currentColor"
+                        aria-hidden="true"
+                      />
                     ))}
                   </div>
                 </div>
@@ -104,7 +115,7 @@ export default function Testimonials() {
                     className="mt-4 inline-flex items-center gap-2 rounded-lg border border-pink-500/20 bg-pink-500/10 px-3 py-1.5 text-xs font-bold text-pink-700 hover:border-pink-500/40 hover:bg-pink-500/15 dark:text-pink-300"
                   >
                     Ler mais
-                    <i className="fa-solid fa-up-right-from-square text-[10px]"></i>
+                    <ExternalLink size={12} aria-hidden="true" />
                   </button>
                 </div>
 
@@ -174,12 +185,17 @@ export default function Testimonials() {
 
               <div className="mb-5 flex items-center justify-between border-y border-black/5 py-4 dark:border-white/5">
                 <span className="inline-flex items-center gap-2 rounded-full border border-[#0077B5]/20 bg-[#0077B5]/10 px-3 py-1.5 text-xs font-bold text-[#0077B5] dark:text-blue-300">
-                  <i className="fa-brands fa-linkedin"></i>
+                  <FaLinkedin aria-hidden="true" />
                   Recomendação LinkedIn
                 </span>
                 <div className="flex gap-1 text-sm text-yellow-400">
                   {[1, 2, 3, 4, 5].map((star) => (
-                    <i key={star} className="fa-solid fa-star"></i>
+                    <Star
+                      key={star}
+                      size={14}
+                      fill="currentColor"
+                      aria-hidden="true"
+                    />
                   ))}
                 </div>
               </div>
@@ -198,7 +214,7 @@ export default function Testimonials() {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-3 px-8 py-3 rounded-lg bg-[#0077B5] text-white font-bold hover:shadow-md hover:shadow-[#0077B5]/20 hover:-translate-y-0.5"
           >
-            <i className="fa-brands fa-linkedin"></i> Ver todas no LinkedIn
+            <FaLinkedin aria-hidden="true" /> Ver todas no LinkedIn
           </Link>
         </div>
       </div>
