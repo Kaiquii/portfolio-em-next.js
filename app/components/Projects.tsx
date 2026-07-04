@@ -20,8 +20,8 @@ const projects = [
     tags: ["Next.js", "TypeScript", "Go", "API REST"],
     category: "Projeto principal",
     featured: true,
-    repo: "https://github.com/Kaiquii/App-Financeiro-Web.git",
-    live: "https://app-financeiro-web.netlify.app/login",
+    repo: "https://github.com/Kaiquii/Sobra-Ai-Web.git",
+    live: "https://sobra-ai.netlify.app/login",
   },
   {
     id: 2,
