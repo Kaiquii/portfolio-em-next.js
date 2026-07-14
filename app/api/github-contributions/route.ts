@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 
 const GITHUB_USERNAME = "Kaiquii";
-const REVALIDATE_SECONDS = 60 * 60 * 6;
+
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 type ContributionDay = {
   date: string;
@@ -101,7 +103,7 @@ async function fetchFromGraphql(
         ...getDateRange(selectedYear),
       },
     }),
-    next: { revalidate: REVALIDATE_SECONDS },
+    cache: "no-store",
   });
 
   if (!response.ok) {
@@ -212,7 +214,7 @@ async function fetchPublicCalendar(
         "Accept-Language": "en-US,en;q=0.9",
         "User-Agent": "portfolio-kaiqui",
       },
-      next: { revalidate: REVALIDATE_SECONDS },
+      cache: "no-store",
     },
   );
 
@@ -303,8 +305,9 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json(calendar, {
       headers: {
-        "Cache-Control":
-          "public, s-maxage=21600, stale-while-revalidate=86400",
+        "Cache-Control": "no-store, max-age=0",
+        "CDN-Cache-Control": "no-store",
+        "Vercel-CDN-Cache-Control": "no-store",
       },
     });
   } catch (error) {

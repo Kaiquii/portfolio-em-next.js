@@ -113,7 +113,7 @@ export default function ContributionCalendar() {
       try {
         const response = await fetch(
           `/api/github-contributions?year=${selectedYear}`,
-          { signal: controller.signal },
+          { cache: "no-store", signal: controller.signal },
         );
 
         if (!response.ok) throw new Error("Falha ao carregar contribuições");
