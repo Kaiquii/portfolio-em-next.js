@@ -13,6 +13,7 @@ import { getGithubRepos } from "../api/gitHub";
 import { GithubRepo } from "../types/githubTypes";
 import RepoCard from "./ui/RepoCard";
 import FilterDropdown from "./ui/FilterDropdown";
+import ContributionCalendar from "./ui/ContributionCalendar";
 
 const formatDate = (date: string) =>
   new Intl.DateTimeFormat("pt-BR", {
@@ -122,6 +123,8 @@ export default function GithubSection() {
           </div>
         ) : (
           <div>
+            <ContributionCalendar />
+
             <div className="mb-8 rounded-lg border border-black/10 bg-white/85 p-4 shadow-md shadow-black/5 backdrop-blur dark:border-white/10 dark:bg-[#111216]/90 dark:shadow-none lg:p-5">
               <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
                 <div>
