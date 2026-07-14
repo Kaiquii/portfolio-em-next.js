@@ -14,6 +14,7 @@ import { GithubRepo } from "../types/githubTypes";
 import RepoCard from "./ui/RepoCard";
 import FilterDropdown from "./ui/FilterDropdown";
 import ContributionCalendar from "./ui/ContributionCalendar";
+import LanguageChart from "./ui/LanguageChart";
 
 const formatDate = (date: string) =>
   new Intl.DateTimeFormat("pt-BR", {
@@ -125,76 +126,84 @@ export default function GithubSection() {
           <div>
             <ContributionCalendar />
 
-            <div className="mb-8 rounded-lg border border-black/10 bg-white/85 p-4 shadow-md shadow-black/5 backdrop-blur dark:border-white/10 dark:bg-[#111216]/90 dark:shadow-none lg:p-5">
-              <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-                <div>
-                  <span className="mb-2 inline-flex items-center gap-2 rounded-full border border-pink-500/20 bg-pink-500/10 px-3 py-1 text-xs font-bold text-pink-700 dark:text-pink-300">
-                    <CalendarClock size={14} />
-                    Atividade recente
-                  </span>
-                  <h3 className="text-xl font-bold text-gray-950 dark:text-white">
-                    Últimos commits enviados
-                  </h3>
-                </div>
-                <span className="text-xs font-medium text-gray-500 dark:text-gray-400">
-                  Direto dos repositórios públicos
-                </span>
-              </div>
+            <div className="mb-8 grid items-start gap-4 lg:grid-cols-[minmax(270px,0.8fr)_minmax(0,2.2fr)]">
+              <LanguageChart />
 
-              <div className="grid grid-cols-1 gap-3 lg:grid-cols-4">
-                {recentActivity.map((repo, index) => (
-                  <a
-                    key={repo.id}
-                    href={repo.html_url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group relative overflow-hidden rounded-lg border border-black/10 bg-white/75 p-3.5 shadow-sm hover:-translate-y-0.5 hover:border-pink-500/35 hover:bg-white dark:border-white/10 dark:bg-black/20 dark:hover:bg-white/10"
-                  >
-                    <div className="mb-2 flex items-center gap-2">
-                      <span className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-linear-to-br from-pink-500 to-blue-600 text-[11px] font-bold text-white">
-                        {String(index + 1).padStart(2, "0")}
+              <div className="flex min-w-0 flex-col gap-4">
+                <div className="rounded-lg border border-black/10 bg-white/85 p-4 shadow-md shadow-black/5 backdrop-blur dark:border-white/10 dark:bg-[#111216]/90 dark:shadow-none lg:p-5">
+                  <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                    <div>
+                      <span className="mb-2 inline-flex items-center gap-2 rounded-full border border-pink-500/20 bg-pink-500/10 px-3 py-1 text-xs font-bold text-pink-700 dark:text-pink-300">
+                        <CalendarClock size={14} />
+                        Atividade recente
                       </span>
-                      <strong className="line-clamp-1 text-sm font-bold text-gray-950 dark:text-white">
-                        {repo.name}
-                      </strong>
+                      <h3 className="text-xl font-bold text-gray-950 dark:text-white">
+                        Últimos commits enviados
+                      </h3>
                     </div>
-                    <p className="line-clamp-1 text-xs text-gray-600 dark:text-gray-400">
-                      {repo.description ||
-                        "Repositório público atualizado recentemente."}
-                    </p>
-                    <div className="mt-3 flex items-center justify-between text-xs font-medium text-gray-500 dark:text-gray-400">
-                      <span>{formatDate(repo.pushed_at || repo.updated_at)}</span>
-                      <ChevronRight
-                        className="text-pink-500 group-hover:translate-x-0.5"
-                        size={16}
-                      />
-                    </div>
-                  </a>
-                ))}
-              </div>
-            </div>
+                    <span className="text-xs font-medium text-gray-500 dark:text-gray-400">
+                      Direto dos repositórios públicos
+                    </span>
+                  </div>
 
-            <div className="relative z-50 flex flex-col md:flex-row gap-4 justify-center max-w-2xl mx-auto mb-10 rounded-lg border border-black/10 bg-white/75 p-3 shadow-md shadow-black/5 backdrop-blur dark:border-white/10 dark:bg-white/5 dark:shadow-none">
-              <div className="relative w-full md:w-1/2">
-                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                  <Search className="text-gray-400" size={16} />
+                  <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4">
+                    {recentActivity.map((repo, index) => (
+                      <a
+                        key={repo.id}
+                        href={repo.html_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group relative overflow-hidden rounded-lg border border-black/10 bg-white/75 p-3.5 shadow-sm hover:-translate-y-0.5 hover:border-pink-500/35 hover:bg-white dark:border-white/10 dark:bg-black/20 dark:hover:bg-white/10"
+                      >
+                        <div className="mb-2 flex items-center gap-2">
+                          <span className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-linear-to-br from-pink-500 to-blue-600 text-[11px] font-bold text-white">
+                            {String(index + 1).padStart(2, "0")}
+                          </span>
+                          <strong className="line-clamp-1 text-sm font-bold text-gray-950 dark:text-white">
+                            {repo.name}
+                          </strong>
+                        </div>
+                        <p className="line-clamp-1 text-xs text-gray-600 dark:text-gray-400">
+                          {repo.description ||
+                            "Repositório público atualizado recentemente."}
+                        </p>
+                        <div className="mt-3 flex items-center justify-between text-xs font-medium text-gray-500 dark:text-gray-400">
+                          <span>
+                            {formatDate(repo.pushed_at || repo.updated_at)}
+                          </span>
+                          <ChevronRight
+                            className="text-pink-500 group-hover:translate-x-0.5"
+                            size={16}
+                          />
+                        </div>
+                      </a>
+                    ))}
+                  </div>
                 </div>
-                <input
-                  type="text"
-                  placeholder="Buscar repositório..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-11 pr-4 py-3 rounded-lg bg-white dark:bg-[#1a1a1a] border border-black/10 dark:border-white/10 text-gray-900 dark:text-white focus:outline-none focus:border-pink-500 focus:ring-1 focus:ring-pink-500 shadow-sm"
-                />
-              </div>
 
-              <FilterDropdown
-                filterStats={filterStats}
-                activeFilter={activeFilter}
-                setActiveFilter={setActiveFilter}
-                isOpen={isDropdownOpen}
-                setIsOpen={setIsDropdownOpen}
-              />
+                <div className="relative z-50 flex flex-col gap-3 rounded-lg border border-black/10 bg-white/75 p-3 shadow-md shadow-black/5 backdrop-blur dark:border-white/10 dark:bg-white/5 dark:shadow-none md:flex-row">
+                  <div className="relative w-full md:w-1/2">
+                    <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
+                      <Search className="text-gray-400" size={16} />
+                    </div>
+                    <input
+                      type="text"
+                      placeholder="Buscar repositório..."
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      className="w-full rounded-lg border border-black/10 bg-white py-3 pr-4 pl-11 text-gray-900 shadow-sm focus:border-pink-500 focus:ring-1 focus:ring-pink-500 focus:outline-none dark:border-white/10 dark:bg-[#1a1a1a] dark:text-white"
+                    />
+                  </div>
+
+                  <FilterDropdown
+                    filterStats={filterStats}
+                    activeFilter={activeFilter}
+                    setActiveFilter={setActiveFilter}
+                    isOpen={isDropdownOpen}
+                    setIsOpen={setIsDropdownOpen}
+                  />
+                </div>
+              </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 min-h-62.5 relative z-0">
