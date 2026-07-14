@@ -9,7 +9,14 @@ import {
   useState,
 } from "react";
 import { createPortal } from "react-dom";
-import { CalendarDays, Check, ChevronDown, Loader2 } from "lucide-react";
+import {
+  CalendarDays,
+  Check,
+  ChevronDown,
+  ExternalLink,
+  Loader2,
+  Monitor,
+} from "lucide-react";
 
 type ContributionDay = {
   date: string;
@@ -38,6 +45,8 @@ type TooltipData = {
 
 const currentYear = new Date().getFullYear();
 const defaultYears = Array.from({ length: 5 }, (_, index) => currentYear - index);
+const TOOLTIP_SHOW_DELAY = 240;
+const TOOLTIP_HIDE_DELAY = 80;
 
 const levelClasses = [
   "bg-[#ebedf0] dark:bg-[#161b22]",
@@ -86,6 +95,12 @@ export default function ContributionCalendar() {
   const [tooltip, setTooltip] = useState<TooltipData | null>(null);
   const [isYearMenuOpen, setIsYearMenuOpen] = useState(false);
   const yearFilterRef = useRef<HTMLDivElement>(null);
+  const tooltipShowTimerRef = useRef<ReturnType<typeof setTimeout> | null>(
+    null,
+  );
+  const tooltipHideTimerRef = useRef<ReturnType<typeof setTimeout> | null>(
+    null,
+  );
 
   useEffect(() => {
     const controller = new AbortController();
@@ -138,6 +153,18 @@ export default function ContributionCalendar() {
     };
   }, [isYearMenuOpen]);
 
+  useEffect(
+    () => () => {
+      if (tooltipShowTimerRef.current) {
+        clearTimeout(tooltipShowTimerRef.current);
+      }
+      if (tooltipHideTimerRef.current) {
+        clearTimeout(tooltipHideTimerRef.current);
+      }
+    },
+    [],
+  );
+
   const monthLabels = useMemo(() => {
     if (!data) return [];
 
@@ -166,7 +193,10 @@ export default function ContributionCalendar() {
     return labels;
   }, [data]);
 
-  const showTooltip = (day: ContributionDay, element: HTMLElement) => {
+  const getTooltipData = (
+    day: ContributionDay,
+    element: HTMLElement,
+  ): TooltipData => {
     const rect = element.getBoundingClientRect();
     const tooltipHalfWidth = 118;
     const left = Math.min(
@@ -175,23 +205,66 @@ export default function ContributionCalendar() {
     );
     const placement = rect.top < 105 ? "below" : "above";
 
-    setTooltip({
+    return {
       day,
       left,
       placement,
       top: placement === "above" ? rect.top - 10 : rect.bottom + 10,
-    });
+    };
+  };
+
+  const scheduleTooltip = (day: ContributionDay, element: HTMLElement) => {
+    if (tooltipShowTimerRef.current) {
+      clearTimeout(tooltipShowTimerRef.current);
+    }
+
+    const nextTooltip = getTooltipData(day, element);
+    tooltipShowTimerRef.current = setTimeout(() => {
+      setTooltip(nextTooltip);
+      tooltipShowTimerRef.current = null;
+    }, TOOLTIP_SHOW_DELAY);
+  };
+
+  const scheduleTooltipHide = () => {
+    if (tooltipShowTimerRef.current) {
+      clearTimeout(tooltipShowTimerRef.current);
+      tooltipShowTimerRef.current = null;
+    }
+    if (tooltipHideTimerRef.current) {
+      clearTimeout(tooltipHideTimerRef.current);
+    }
+
+    tooltipHideTimerRef.current = setTimeout(() => {
+      setTooltip(null);
+      tooltipHideTimerRef.current = null;
+    }, TOOLTIP_HIDE_DELAY);
+  };
+
+  const showTooltipImmediately = (
+    day: ContributionDay,
+    element: HTMLElement,
+  ) => {
+    if (tooltipShowTimerRef.current) {
+      clearTimeout(tooltipShowTimerRef.current);
+      tooltipShowTimerRef.current = null;
+    }
+    if (tooltipHideTimerRef.current) {
+      clearTimeout(tooltipHideTimerRef.current);
+      tooltipHideTimerRef.current = null;
+    }
+
+    setTooltip(getTooltipData(day, element));
   };
 
   const handleMouseEnter = (
     day: ContributionDay,
     event: MouseEvent<HTMLButtonElement>,
-  ) => showTooltip(day, event.currentTarget);
+  ) => scheduleTooltip(day, event.currentTarget);
 
   const handleFocus = (
     day: ContributionDay,
     event: FocusEvent<HTMLButtonElement>,
-  ) => showTooltip(day, event.currentTarget);
+  ) => showTooltipImmediately(day, event.currentTarget);
 
   if (failed && !data) {
     return (
@@ -220,10 +293,36 @@ export default function ContributionCalendar() {
           </div>
         </div>
 
-        <div className="flex flex-wrap items-center gap-3 sm:justify-end">
+        <div className="flex flex-wrap items-center gap-4 sm:justify-end md:gap-3">
+          <div
+            className="inline-flex h-9 min-w-0 flex-1 items-center justify-start text-sm font-semibold text-gray-700 dark:text-gray-300 md:hidden"
+            aria-live="polite"
+            aria-busy={loading}
+          >
+            {loading ? (
+              <>
+                <Loader2
+                  className="animate-spin text-[#1a7f37] dark:text-[#3fb950]"
+                  size={17}
+                  aria-hidden="true"
+                />
+                <span className="sr-only">Atualizando contribuições</span>
+              </>
+            ) : data?.totalContributions != null ? (
+              <span className="whitespace-nowrap">
+                <span className="text-[#1a7f37] dark:text-[#3fb950]">
+                  {data.totalContributions.toLocaleString("pt-BR")}
+                </span>{" "}
+                contribuições
+              </span>
+            ) : (
+              <span className="text-gray-400">--</span>
+            )}
+          </div>
+
           {!loading && data?.totalContributions != null && (
             <strong
-              className="text-sm text-gray-700 dark:text-gray-300"
+              className="hidden text-sm text-gray-700 dark:text-gray-300 md:block"
               aria-live="polite"
             >
               <span className="text-[#1a7f37] dark:text-[#3fb950]">
@@ -233,7 +332,7 @@ export default function ContributionCalendar() {
             </strong>
           )}
 
-          <div ref={yearFilterRef} className="relative">
+          <div ref={yearFilterRef} className="relative shrink-0">
             <button
               type="button"
               onClick={() => setIsYearMenuOpen((isOpen) => !isOpen)}
@@ -285,7 +384,33 @@ export default function ContributionCalendar() {
         </div>
       </div>
 
-      <div className="relative min-w-0">
+      <div className="rounded-md border border-black/5 bg-black/2 p-4 dark:border-white/5 dark:bg-black/15 md:hidden">
+        <div className="flex items-start gap-3">
+          <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-md bg-[#0969da]/10 text-[#0969da] dark:bg-[#58a6ff]/10 dark:text-[#58a6ff]">
+            <Monitor size={18} aria-hidden="true" />
+          </span>
+          <div className="min-w-0">
+            <strong className="block text-sm font-semibold text-gray-900 dark:text-white">
+              Visualização completa no computador
+            </strong>
+            <p className="mt-1 text-xs leading-5 text-gray-500 dark:text-gray-400">
+              O gráfico anual detalhado está disponível em telas maiores.
+            </p>
+          </div>
+        </div>
+
+        <a
+          href="https://github.com/Kaiquii"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-md border border-black/10 bg-white px-3 py-2.5 text-sm font-semibold text-gray-800 shadow-sm transition-colors hover:border-[#0969da]/40 hover:text-[#0969da] dark:border-white/10 dark:bg-white/5 dark:text-white dark:hover:border-[#58a6ff]/40 dark:hover:text-[#58a6ff]"
+        >
+          Ver perfil no GitHub
+          <ExternalLink size={15} aria-hidden="true" />
+        </a>
+      </div>
+
+      <div className="relative hidden min-w-0 md:block">
         {loading && data && (
           <div className="absolute inset-0 z-20 grid place-items-center rounded-md bg-white/70 backdrop-blur-[2px] dark:bg-[#111216]/70">
             <Loader2
@@ -310,7 +435,7 @@ export default function ContributionCalendar() {
             <>
               <div
                 className="overflow-x-auto pb-1"
-                onScroll={() => setTooltip(null)}
+                onScroll={scheduleTooltipHide}
               >
                 <div className="min-w-190">
                   <div className="relative ml-8 h-5 text-[10px] font-medium capitalize text-gray-500 dark:text-gray-400">
@@ -360,9 +485,9 @@ export default function ContributionCalendar() {
                                 onMouseEnter={(event) =>
                                   handleMouseEnter(day, event)
                                 }
-                                onMouseLeave={() => setTooltip(null)}
+                                onMouseLeave={scheduleTooltipHide}
                                 onFocus={(event) => handleFocus(day, event)}
-                                onBlur={() => setTooltip(null)}
+                                onBlur={scheduleTooltipHide}
                                 aria-label={`${activity} em ${date}`}
                                 className={`aspect-square cursor-default rounded-xs ring-1 ring-inset ring-black/5 outline-none dark:ring-white/5 ${
                                   levelClasses[day.level] ?? levelClasses[0]
