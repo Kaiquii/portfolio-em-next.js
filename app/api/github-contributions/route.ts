@@ -58,18 +58,13 @@ const graphqlQuery = `
   }
 `;
 
-const getDateRange = (selectedYear: number) => {
-  const currentYear = new Date().getFullYear();
-
-  if (selectedYear === currentYear) {
-    return { from: null, to: null };
-  }
-
-  return {
-    from: `${selectedYear}-01-01T00:00:00Z`,
-    to: `${selectedYear}-12-31T23:59:59Z`,
-  };
-};
+const getDateRange = (selectedYear: number, isRollingPeriod: boolean) =>
+  isRollingPeriod
+    ? { from: null, to: null }
+    : {
+        from: `${selectedYear}-01-01T00:00:00Z`,
+        to: `${selectedYear}-12-31T23:59:59Z`,
+      };
 
 const normalizeYears = (years: number[]) => {
   const currentYear = new Date().getFullYear();
@@ -87,6 +82,7 @@ const normalizeYears = (years: number[]) => {
 async function fetchFromGraphql(
   token: string,
   selectedYear: number,
+  isRollingPeriod: boolean,
 ): Promise<ContributionCalendar> {
   const response = await fetch("https://api.github.com/graphql", {
     method: "POST",
@@ -100,7 +96,7 @@ async function fetchFromGraphql(
       query: graphqlQuery,
       variables: {
         login: GITHUB_USERNAME,
-        ...getDateRange(selectedYear),
+        ...getDateRange(selectedYear, isRollingPeriod),
       },
     }),
     cache: "no-store",
@@ -200,12 +196,11 @@ const getFallbackYears = (html: string) => {
 
 async function fetchPublicCalendar(
   selectedYear: number,
+  isRollingPeriod: boolean,
 ): Promise<ContributionCalendar> {
-  const currentYear = new Date().getFullYear();
-  const query =
-    selectedYear === currentYear
-      ? ""
-      : `?from=${selectedYear}-01-01&to=${selectedYear}-12-31`;
+  const query = isRollingPeriod
+    ? ""
+    : `?from=${selectedYear}-01-01&to=${selectedYear}-12-31`;
   const response = await fetch(
     `https://github.com/users/${GITHUB_USERNAME}/contributions${query}`,
     {
@@ -287,21 +282,27 @@ async function fetchPublicCalendar(
 
 export async function GET(request: NextRequest) {
   const currentYear = new Date().getFullYear();
-  const requestedYear = Number(request.nextUrl.searchParams.get("year"));
-  const selectedYear =
+  const requestedYearParam = request.nextUrl.searchParams.get("year");
+  const requestedYear = Number(requestedYearParam);
+  const hasSelectedYear =
+    requestedYearParam !== null &&
     Number.isInteger(requestedYear) &&
     requestedYear >= 2008 &&
-    requestedYear <= currentYear
-      ? requestedYear
-      : currentYear;
+    requestedYear <= currentYear;
+  const selectedYear = hasSelectedYear ? requestedYear : currentYear;
+  const isRollingPeriod = !hasSelectedYear;
 
   try {
     const token = process.env.GITHUB_TOKEN;
     const calendar = token
-      ? await fetchFromGraphql(token, selectedYear).catch(() =>
-          fetchPublicCalendar(selectedYear),
+      ? await fetchFromGraphql(
+          token,
+          selectedYear,
+          isRollingPeriod,
+        ).catch(() =>
+          fetchPublicCalendar(selectedYear, isRollingPeriod),
         )
-      : await fetchPublicCalendar(selectedYear);
+      : await fetchPublicCalendar(selectedYear, isRollingPeriod);
 
     return NextResponse.json(calendar, {
       headers: {

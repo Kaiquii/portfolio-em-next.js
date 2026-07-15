@@ -88,7 +88,7 @@ const mergeYears = (currentYears: number[], receivedYears: number[]) => {
 
 export default function ContributionCalendar() {
   const [data, setData] = useState<ContributionData | null>(null);
-  const [selectedYear, setSelectedYear] = useState(currentYear);
+  const [selectedYear, setSelectedYear] = useState<number | null>(null);
   const [availableYears, setAvailableYears] = useState(defaultYears);
   const [loading, setLoading] = useState(true);
   const [failed, setFailed] = useState(false);
@@ -111,8 +111,10 @@ export default function ContributionCalendar() {
       setTooltip(null);
 
       try {
+        const yearQuery =
+          selectedYear === null ? "" : `?year=${selectedYear}`;
         const response = await fetch(
-          `/api/github-contributions?year=${selectedYear}`,
+          `/api/github-contributions${yearQuery}`,
           { cache: "no-store", signal: controller.signal },
         );
 
@@ -283,8 +285,8 @@ export default function ContributionCalendar() {
           </span>
           <div>
             <h3 className="text-base font-bold text-gray-950 dark:text-white sm:text-lg">
-              {selectedYear === currentYear
-                ? "Contribuições no último ano"
+              {selectedYear === null
+                ? "Contribuições nos últimos 12 meses"
                 : `Contribuições em ${selectedYear}`}
             </h3>
             <p className="text-xs text-gray-500 dark:text-gray-400">
@@ -341,7 +343,11 @@ export default function ContributionCalendar() {
               aria-expanded={isYearMenuOpen}
               aria-controls="contribution-year-options"
             >
-              <span>Ano: {selectedYear}</span>
+              <span>
+                {selectedYear === null
+                  ? "Filtrar por ano"
+                  : `Ano: ${selectedYear}`}
+              </span>
               <ChevronDown
                 size={15}
                 aria-hidden="true"
@@ -363,7 +369,9 @@ export default function ContributionCalendar() {
                     role="option"
                     aria-selected={selectedYear === year}
                     onClick={() => {
-                      setSelectedYear(year);
+                      setSelectedYear((selected) =>
+                        selected === year ? null : year,
+                      );
                       setIsYearMenuOpen(false);
                     }}
                     className={`flex w-full cursor-pointer items-center justify-between rounded px-3 py-2 text-left text-sm font-medium transition-colors ${
