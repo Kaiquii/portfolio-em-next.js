@@ -15,7 +15,7 @@ const projects = [
   {
     id: 1,
     title: "App Financeiro Web",
-    img: "/img/app-financeiro-web.png",
+    img: "/img/app-financeiro-web.webp",
     desc: "Plataforma financeira web com autenticação, dashboards e API REST em Go para controle completo de receitas, despesas e metas.",
     tags: ["Next.js", "TypeScript", "Go", "API REST"],
     category: "Projeto principal",
@@ -26,7 +26,7 @@ const projects = [
   {
     id: 2,
     title: "Site Motoboy - Chama o Boy",
-    img: "/img/site-motoboy.png",
+    img: "/img/site-motoboy.webp",
     desc: "Landing page responsiva para corridas e entregas, com formulário direto para WhatsApp e foco em conversão rápida.",
     tags: ["Next.js", "TypeScript", "WhatsApp"],
     category: "Negócio local",
@@ -36,7 +36,7 @@ const projects = [
   {
     id: 3,
     title: "Consulta Fipe",
-    img: "/img/projeto-fipe.png",
+    img: "/img/projeto-fipe.webp",
     desc: "Aplicação moderna para consultar a Tabela Fipe de carros, motos e caminhões usando dados de API externa.",
     tags: ["Next.js", "TypeScript", "API REST"],
     category: "Integração API",
@@ -46,7 +46,7 @@ const projects = [
   {
     id: 4,
     title: "Calculadora de IMC",
-    img: "/img/projeto-imc.png",
+    img: "/img/projeto-imc.webp",
     desc: "Calculadora de IMC com interface simples, responsiva e feedback visual para acompanhar indicadores de saúde.",
     tags: ["Next.js", "TypeScript", "Tailwind CSS"],
     category: "Interface web",
@@ -56,7 +56,7 @@ const projects = [
   {
     id: 5,
     title: "Pet Shop - DEV",
-    img: "/img/petdev.png",
+    img: "/img/petdev.webp",
     desc: "E-commerce completo para petshop com sistema de carrinho e checkout.",
     tags: ["React", "Node.js", "E-commerce"],
     category: "E-commerce",
@@ -66,7 +66,7 @@ const projects = [
   {
     id: 6,
     title: "Starbucks Clone",
-    img: "/img/starbucks-foto.png",
+    img: "/img/starbucks-foto.webp",
     desc: "Landing page responsiva inspirada na experiência visual da Starbucks, com foco em layout, cores e apresentação de produto.",
     tags: ["HTML5", "CSS3", "JavaScript"],
     category: "Landing page",
@@ -76,7 +76,7 @@ const projects = [
   {
     id: 7,
     title: "Agência Awax",
-    img: "/img/awaw.png",
+    img: "/img/awaw.webp",
     desc: "Template de agência criativa com seções institucionais, layout responsivo e composição visual moderna.",
     tags: ["HTML5", "CSS3", "Responsivo"],
     category: "Institucional",
@@ -86,7 +86,7 @@ const projects = [
   {
     id: 8,
     title: "Loja de Roupas",
-    img: "/img/loja-roupas.png",
+    img: "/img/loja-roupas.webp",
     desc: "E-commerce de moda com catálogo de produtos, filtros dinâmicos e experiência pensada para navegação rápida.",
     tags: ["E-commerce", "JavaScript", "UI/UX"],
     category: "E-commerce",
@@ -96,7 +96,7 @@ const projects = [
   {
     id: 9,
     title: "Medicenter",
-    img: "/img/medicenter.png",
+    img: "/img/medicenter.webp",
     desc: "Website institucional para clínica médica, com estrutura clara para serviços, informações e agendamentos.",
     tags: ["Institucional", "Responsivo", "Healthcare"],
     category: "Institucional",
@@ -106,7 +106,7 @@ const projects = [
   {
     id: 10,
     title: "Pizzaria Delivery",
-    img: "/img/pizzaria-proj.png",
+    img: "/img/pizzaria-proj.webp",
     desc: "Site de delivery para pizzaria com cardápio interativo, carrinho e fluxo pensado para pedidos online.",
     tags: ["Delivery", "WhatsApp API", "Animações"],
     category: "Delivery",
@@ -116,7 +116,7 @@ const projects = [
   {
     id: 11,
     title: "Cadastro de Produtos",
-    img: "/img/proj-cadastro.png",
+    img: "/img/proj-cadastro.webp",
     desc: "Sistema CRUD para gestão de produtos e estoque, com cadastro, listagem e validação de dados no front-end.",
     tags: ["CRUD", "JavaScript", "Validação"],
     category: "Gestão",
@@ -215,7 +215,6 @@ export default function Projects() {
                       fill
                       sizes="(min-width: 1024px) 33vw, (min-width: 700px) 50vw, 100vw"
                       className="object-cover group-hover:scale-[1.02]"
-                      unoptimized
                     />
                     <div className="absolute inset-x-0 bottom-0 h-24 bg-linear-to-t from-black/65 to-transparent opacity-70" />
                     <div className="absolute left-4 top-4 flex flex-wrap gap-2">

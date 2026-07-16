@@ -192,12 +192,11 @@ export default function Hero() {
             <div className="relative w-68 h-68 overflow-hidden rounded-full p-1 bg-linear-to-tr from-orange-400 via-pink-500 to-blue-600 animate-[profileGlow_4s_ease-in-out_infinite] shadow-2xl sm:w-76 sm:h-76 lg:w-88 lg:h-88">
               <div className="relative h-full w-full overflow-hidden rounded-full border border-white/60 bg-white dark:border-white/10 dark:bg-black">
                 <Image
-                  src="/img/foto-kaiqui.png"
+                  src="/img/foto-kaiqui.webp"
                   alt="Kaiqui Lucas"
                   fill
                   sizes="(min-width: 1024px) 352px, 304px"
                   className="scale-[1.08] object-cover object-[50%_28%]"
-                  unoptimized
                   priority
                 />
               </div>
