@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import axios from "axios";
 import { Braces, Loader2 } from "lucide-react";
 
 type Language = {
@@ -36,13 +37,14 @@ export default function LanguageChart() {
 
     const loadLanguages = async () => {
       try {
-        const response = await fetch("/api/github-languages", {
-          signal: controller.signal,
-        });
-        if (!response.ok) throw new Error("Falha ao carregar linguagens");
+        const response = await axios.get<LanguageData>(
+          "/api/github-languages",
+          {
+            signal: controller.signal,
+          },
+        );
 
-        const languageData: LanguageData = await response.json();
-        setData(languageData);
+        setData(response.data);
       } catch {
         if (!controller.signal.aborted) setFailed(true);
       } finally {

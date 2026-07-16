@@ -1,6 +1,9 @@
+import axios from "axios";
 import { NextRequest, NextResponse } from "next/server";
-
-const GITHUB_USERNAME = "Kaiquii";
+import {
+  getGithubConfig,
+  type GithubConfig,
+} from "../../config/github";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -79,34 +82,33 @@ const normalizeYears = (years: number[]) => {
   );
 };
 
-async function fetchFromGraphql(
+async function requestFromGraphql(
   token: string,
   selectedYear: number,
   isRollingPeriod: boolean,
+  config: GithubConfig,
 ): Promise<ContributionCalendar> {
-  const response = await fetch("https://api.github.com/graphql", {
-    method: "POST",
-    headers: {
-      Accept: "application/vnd.github+json",
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
-      "User-Agent": "portfolio-kaiqui",
-    },
-    body: JSON.stringify({
+  const response = await axios.post(
+    `${config.apiUrl}/graphql`,
+    {
       query: graphqlQuery,
       variables: {
-        login: GITHUB_USERNAME,
+        login: config.username,
         ...getDateRange(selectedYear, isRollingPeriod),
       },
-    }),
-    cache: "no-store",
-  });
+    },
+    {
+      headers: {
+        Accept: "application/vnd.github+json",
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+        "User-Agent": "portfolio-kaiqui",
+      },
+      timeout: 15_000,
+    },
+  );
 
-  if (!response.ok) {
-    throw new Error(`GitHub GraphQL respondeu com ${response.status}`);
-  }
-
-  const payload = await response.json();
+  const payload = response.data;
   const user = payload?.data?.user;
   const calendar = user?.selectedContributions?.contributionCalendar;
 
@@ -194,30 +196,28 @@ const getFallbackYears = (html: string) => {
   return normalizeYears(parsedYears);
 };
 
-async function fetchPublicCalendar(
+async function requestPublicCalendar(
   selectedYear: number,
   isRollingPeriod: boolean,
+  config: GithubConfig,
 ): Promise<ContributionCalendar> {
   const query = isRollingPeriod
     ? ""
     : `?from=${selectedYear}-01-01&to=${selectedYear}-12-31`;
-  const response = await fetch(
-    `https://github.com/users/${GITHUB_USERNAME}/contributions${query}`,
+  const response = await axios.get<string>(
+    `${config.webUrl}/users/${config.username}/contributions${query}`,
     {
       headers: {
         Accept: "text/html",
         "Accept-Language": "en-US,en;q=0.9",
         "User-Agent": "portfolio-kaiqui",
       },
-      cache: "no-store",
+      responseType: "text",
+      timeout: 15_000,
     },
   );
 
-  if (!response.ok) {
-    throw new Error(`GitHub respondeu com ${response.status}`);
-  }
-
-  const html = await response.text();
+  const html = response.data;
   const dayTags =
     html.match(/<[^>]+data-date=(?:"[^"]+"|'[^']+')[^>]*>/g) ?? [];
   const tooltipCounts = extractTooltipCounts(html);
@@ -294,15 +294,17 @@ export async function GET(request: NextRequest) {
 
   try {
     const token = process.env.GITHUB_TOKEN;
+    const config = getGithubConfig();
     const calendar = token
-      ? await fetchFromGraphql(
+      ? await requestFromGraphql(
           token,
           selectedYear,
           isRollingPeriod,
+          config,
         ).catch(() =>
-          fetchPublicCalendar(selectedYear, isRollingPeriod),
+          requestPublicCalendar(selectedYear, isRollingPeriod, config),
         )
-      : await fetchPublicCalendar(selectedYear, isRollingPeriod);
+      : await requestPublicCalendar(selectedYear, isRollingPeriod, config);
 
     return NextResponse.json(calendar, {
       headers: {

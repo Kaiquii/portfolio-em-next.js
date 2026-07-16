@@ -8,6 +8,7 @@ import {
   useRef,
   useState,
 } from "react";
+import axios from "axios";
 import { createPortal } from "react-dom";
 import {
   CalendarDays,
@@ -111,16 +112,15 @@ export default function ContributionCalendar() {
       setTooltip(null);
 
       try {
-        const yearQuery =
-          selectedYear === null ? "" : `?year=${selectedYear}`;
-        const response = await fetch(
-          `/api/github-contributions${yearQuery}`,
-          { cache: "no-store", signal: controller.signal },
+        const response = await axios.get<ContributionData>(
+          "/api/github-contributions",
+          {
+            params: selectedYear === null ? undefined : { year: selectedYear },
+            signal: controller.signal,
+          },
         );
 
-        if (!response.ok) throw new Error("Falha ao carregar contribuições");
-
-        const calendar: ContributionData = await response.json();
+        const calendar = response.data;
         setData(calendar);
         setAvailableYears((years) => mergeYears(years, calendar.years));
       } catch {
@@ -374,7 +374,7 @@ export default function ContributionCalendar() {
                       );
                       setIsYearMenuOpen(false);
                     }}
-                    className={`flex w-full cursor-pointer items-center justify-between rounded px-3 py-2 text-left text-sm font-medium transition-colors ${
+                    className={`flex w-full cursor-pointer items-center justify-between rounded px-3 py-2 text-left text-sm font-medium ${
                       selectedYear === year
                         ? "bg-[#0969da] text-white dark:bg-[#1f6feb]"
                         : "text-gray-700 hover:bg-black/5 dark:text-gray-300 dark:hover:bg-white/8"
@@ -411,7 +411,7 @@ export default function ContributionCalendar() {
           href="https://github.com/Kaiquii"
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-md border border-black/10 bg-white px-3 py-2.5 text-sm font-semibold text-gray-800 shadow-sm transition-colors hover:border-[#0969da]/40 hover:text-[#0969da] dark:border-white/10 dark:bg-white/5 dark:text-white dark:hover:border-[#58a6ff]/40 dark:hover:text-[#58a6ff]"
+          className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-md border border-black/10 bg-white px-3 py-2.5 text-sm font-semibold text-gray-800 shadow-sm hover:border-[#0969da]/40 hover:text-[#0969da] dark:border-white/10 dark:bg-white/5 dark:text-white dark:hover:border-[#58a6ff]/40 dark:hover:text-[#58a6ff]"
         >
           Ver perfil no GitHub
           <ExternalLink size={15} aria-hidden="true" />

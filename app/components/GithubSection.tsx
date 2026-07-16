@@ -31,7 +31,7 @@ export default function GithubSection() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   useEffect(() => {
-    const fetchRepos = async () => {
+    const loadRepos = async () => {
       try {
         const data = await getGithubRepos();
         setRepos(data.filter((repo) => repo.name.toLowerCase() !== "kaiquii"));
@@ -41,7 +41,7 @@ export default function GithubSection() {
         setLoading(false);
       }
     };
-    fetchRepos();
+    loadRepos();
   }, []);
 
   const filterStats = useMemo(() => {

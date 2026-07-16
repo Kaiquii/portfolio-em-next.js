@@ -1,9 +1,9 @@
+import axios from "axios";
 import { NextResponse } from "next/server";
 import fallbackRepositoriesData from "../../data/githubRepositoriesFallback.json";
+import { getGithubConfig } from "../../config/github";
 import { GithubRepo } from "../../types/githubTypes";
 
-const GITHUB_USERNAME = "Kaiquii";
-const REVALIDATE_SECONDS = 60 * 60 * 12;
 const fallbackRepositories = fallbackRepositoriesData as GithubRepo[];
 
 const repositoriesResponse = (
@@ -25,28 +25,25 @@ export async function GET() {
   if (!token) return repositoriesResponse(fallbackRepositories, "snapshot");
 
   try {
+    const { apiUrl, username } = getGithubConfig();
     const repositories: GithubRepo[] = [];
     let page = 1;
     let hasNextPage = true;
 
     while (hasNextPage) {
-      const response = await fetch(
-        `https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=100&page=${page}`,
+      const response = await axios.get<GithubRepo[]>(
+        `${apiUrl}/users/${username}/repos?sort=updated&per_page=100&page=${page}`,
         {
           headers: {
             Accept: "application/vnd.github+json",
             ...(token ? { Authorization: `Bearer ${token}` } : {}),
             "User-Agent": "portfolio-kaiqui",
           },
-          next: { revalidate: REVALIDATE_SECONDS },
+          timeout: 15_000,
         },
       );
 
-      if (!response.ok) {
-        throw new Error(`GitHub respondeu com ${response.status}`);
-      }
-
-      const currentPage: GithubRepo[] = await response.json();
+      const currentPage = response.data;
       repositories.push(...currentPage.filter((repository) => !repository.fork));
       hasNextPage = currentPage.length === 100;
       page += 1;

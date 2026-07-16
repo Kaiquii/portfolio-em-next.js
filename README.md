@@ -1,47 +1,167 @@
-# Como Rodar Este Projeto (Guia para Iniciantes)
+# Portfólio Kaiqui Dev
 
-Este guia foi feito para ajudar você a visualizar este projeto no seu computador, mesmo que não tenha experiência técnica prévia. Siga os passos abaixo com calma.
+Portfólio profissional desenvolvido com Next.js, TypeScript e Tailwind CSS. O projeto reúne apresentação, projetos, atividade pública do GitHub, linguagens mais utilizadas, depoimentos e canais de contato em uma experiência responsiva e instalável como PWA.
 
----
+## Demonstração
 
-## Passo 1: Instalar as Ferramentas Necessárias
+- Site: [portfolio-kaiqui.vercel.app](https://portfolio-kaiqui.vercel.app)
+- GitHub: [github.com/Kaiquii](https://github.com/Kaiquii)
+- LinkedIn: [linkedin.com/in/kaiqui-lucas](https://www.linkedin.com/in/kaiqui-lucas/)
 
-Antes de começar, seu computador precisa de um programa chamado **Node.js**. Ele é o "motor" que faz o projeto funcionar.
+## Funcionalidades
 
-1. Acesse o site oficial: [nodejs.org](https://nodejs.org).
-2. Baixe a versão recomendada (geralmente marcada como **LTS** - Long Term Support).
-3. Instale como qualquer outro programa (clicando em "Next" ou "Próximo" até terminar).
+- Apresentação profissional com tema claro e escuro.
+- Carrossel de projetos com links para demonstração e código-fonte.
+- Listagem e busca de repositórios públicos do GitHub.
+- Filtro de repositórios por linguagem.
+- Calendário de contribuições dos últimos 12 meses ou de um ano específico.
+- Gráfico das seis linguagens com maior volume de código público.
+- Exibição dos últimos commits enviados.
+- Depoimentos profissionais.
+- Contato por WhatsApp, e-mail e LinkedIn.
+- Cópia do endereço de e-mail com feedback visual.
+- Download do currículo.
+- PWA com suporte à instalação e funcionamento offline dos recursos estáticos.
 
-> **Como saber se funcionou?**
-> Abra o terminal do seu computador (No Windows chame de "Prompt de Comando" ou "PowerShell"; no Mac/Linux chame de "Terminal") e digite:
-> `node -v`
-> Se aparecerem números (ex: `v18.17.0`), está tudo pronto!
+## Tecnologias
 
----
+- Next.js 16 e React 19.
+- TypeScript.
+- Tailwind CSS 4.
+- Framer Motion.
+- Zustand.
+- Swiper.
+- Axios.
+- Lucide React e React Icons.
+- GitHub REST API e GitHub GraphQL API.
+- `@ducanh2912/next-pwa` e Workbox.
 
-## Passo 2: Baixar o Projeto
+## Estrutura principal
 
-Se você recebeu este projeto como um arquivo compactado (.zip):
-1. Descompacte (extraia) a pasta em um local de fácil acesso, como sua **Área de Trabalho**.
+```text
+app/
+├── api/
+│   ├── github-contributions/   # Calendário de contribuições
+│   ├── github-languages/       # Volume de código por linguagem
+│   ├── github-repositories/    # Repositórios públicos e fallback
+│   └── gitHub.ts               # Cliente interno da API de repositórios
+├── components/                 # Seções e componentes da interface
+├── data/                       # Snapshot de fallback dos repositórios
+├── store/                      # Estado global do tema
+├── types/                      # Tipos compartilhados
+└── utils/                      # Utilitários de linguagens
 
-Se você vai baixar via código (Git) e não sabe como, recomendo usar a opção de **Download ZIP** no botão verde "Code" aqui na página do repositório.
+public/
+├── document/                   # Currículo
+├── icons/                      # Ícones do PWA
+├── img/                        # Imagens otimizadas em WebP
+└── manifest.json               # Manifesto do PWA
+```
 
----
+## Pré-requisitos
 
-## Passo 3: Preparar o Ambiente
+- Node.js 20 ou superior.
+- npm.
+- Token do GitHub recomendado para carregar todos os dados dinâmicos.
 
-Agora vamos instalar as "peças" que compõem o projeto (chamadas de dependências).
+## Configuração local
 
-1. Abra o **Terminal** ou **Prompt de Comando**.
-2. Você precisa "entrar" na pasta do projeto pelo terminal.
-   * Digite `cd` e dê um espaço.
-   * Arraste a pasta do projeto para dentro da janela do terminal. O caminho será preenchido automaticamente.
-   * Aperte **Enter**.
-3. Agora que o terminal está apontando para a pasta correta, digite o seguinte comando e aperte **Enter**:
+1. Clone o repositório:
 
-   ```bash
-   npm install
-4. Como Rodar o Projeto (Atenção aqui!), agora vamos ligar o servidor. No mesmo terminal, digite exatamente este comando e aperte Enter:
-    
-    ```bash
-    npm run dev
+```bash
+git clone https://github.com/Kaiquii/portfolio-em-next.js.git
+cd portfolio-em-next.js
+```
+
+2. Instale as dependências:
+
+```bash
+npm install
+```
+
+3. Crie o arquivo `.env.local` com base no exemplo:
+
+```bash
+GITHUB_TOKEN=seu_token_do_github
+GITHUB_USERNAME=Kaiquii
+GITHUB_API_URL=https://api.github.com
+GITHUB_WEB_URL=https://github.com
+```
+
+4. Inicie o ambiente de desenvolvimento:
+
+```bash
+npm run dev
+```
+
+O projeto ficará disponível em [http://localhost:3000](http://localhost:3000).
+
+## Variáveis de ambiente
+
+| Variável | Obrigatória | Uso |
+|---|---|---|
+| `GITHUB_TOKEN` | Recomendada | Autentica as consultas às APIs REST e GraphQL do GitHub e aumenta o limite de requisições. |
+| `GITHUB_USERNAME` | Sim | Define o perfil usado nas consultas de repositórios, linguagens e contribuições. |
+| `GITHUB_API_URL` | Sim | Define a URL-base usada pelo Axios nas APIs REST e GraphQL do GitHub. |
+| `GITHUB_WEB_URL` | Sim | Define a URL-base usada no fallback do calendário público. |
+
+Essas variáveis são lidas e validadas de forma centralizada em `app/config/github.ts`. O token deve permanecer apenas no servidor. Não use o prefixo `NEXT_PUBLIC_` e nunca envie `.env.local` para o GitHub.
+
+Para este portfólio, um token com acesso somente de leitura aos repositórios públicos é suficiente. Sem token, a listagem utiliza o snapshot local e o calendário tenta consultar a página pública do GitHub; o gráfico de linguagens depende do token.
+
+## Integração com o GitHub
+
+O projeto possui três rotas internas:
+
+| Rota | Origem dos dados | Cache |
+|---|---|---|
+| `/api/github-repositories` | API REST do GitHub | 12 horas; usa snapshot local em caso de falha. |
+| `/api/github-languages` | API GraphQL, somando os bytes de linguagens dos repositórios públicos que não são forks | 12 horas. |
+| `/api/github-contributions` | API GraphQL com fallback para o calendário público | Sem cache; os dados são consultados novamente a cada requisição. |
+
+As chamadas ao GitHub acontecem no servidor, utilizam Axios e recebem as URLs externas pelas variáveis de ambiente. Dessa forma, o token não é exposto no navegador e uma mudança de endpoint é feita em um único lugar.
+
+## Scripts
+
+| Comando | Descrição |
+|---|---|
+| `npm run dev` | Inicia o Next.js em desenvolvimento com Webpack. |
+| `npm run build` | Gera a build otimizada de produção e o service worker. |
+| `npm run start` | Executa a build de produção. |
+| `npm run lint` | Analisa o código com ESLint. |
+
+Para verificar os tipos sem gerar arquivos:
+
+```bash
+npx tsc --noEmit
+```
+
+## PWA
+
+O PWA é desativado durante o desenvolvimento e gerado por `npm run build`. O service worker e os arquivos do Workbox são criados na pasta `public`.
+
+Ao alterar imagens ou outros arquivos públicos, execute uma nova build antes do deploy para atualizar a lista de recursos armazenados. As contribuições do GitHub utilizam `no-store` e não são mantidas no cache do PWA.
+
+## Deploy na Vercel
+
+1. Importe o repositório na Vercel.
+2. Abra **Project Settings > Environments**.
+3. Cadastre `GITHUB_TOKEN` como variável sensível para o ambiente de produção.
+4. Cadastre também `GITHUB_USERNAME`, `GITHUB_API_URL` e `GITHUB_WEB_URL` com os valores descritos em `.env.example`.
+5. Faça um novo deploy para aplicar as variáveis.
+
+A Vercel detecta o Next.js e utiliza automaticamente `npm run build`.
+
+## Qualidade do projeto
+
+Antes de publicar alterações, execute:
+
+```bash
+npm run lint
+npx tsc --noEmit
+npm run build
+```
+
+## Autor
+
+Desenvolvido por [Kaiqui Lucas](https://github.com/Kaiquii).

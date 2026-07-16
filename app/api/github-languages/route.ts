@@ -1,7 +1,10 @@
+import axios, { type AxiosResponse } from "axios";
 import { NextResponse } from "next/server";
+import {
+  getGithubConfig,
+  type GithubConfig,
+} from "../../config/github";
 
-const GITHUB_USERNAME = "Kaiquii";
-const REVALIDATE_SECONDS = 60 * 60 * 12;
 
 type LanguageTotal = {
   color: string;
@@ -110,32 +113,34 @@ const normalizeLanguages = (
   return { languages };
 };
 
-async function fetchLanguageBytes(token: string): Promise<LanguageResponse> {
+async function requestLanguageBytes(
+  token: string,
+  config: GithubConfig,
+): Promise<LanguageResponse> {
   const totals = new Map<string, LanguageTotal>();
   let cursor: string | null = null;
   let hasNextPage = true;
 
   while (hasNextPage) {
-    const response: Response = await fetch("https://api.github.com/graphql", {
-      method: "POST",
-      headers: {
-        Accept: "application/vnd.github+json",
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-        "User-Agent": "portfolio-kaiqui",
-      },
-      body: JSON.stringify({
-        query: graphqlQuery,
-        variables: { login: GITHUB_USERNAME, cursor },
-      }),
-      next: { revalidate: REVALIDATE_SECONDS },
-    });
+    const response: AxiosResponse<GraphqlPayload> =
+      await axios.post<GraphqlPayload>(
+        `${config.apiUrl}/graphql`,
+        {
+          query: graphqlQuery,
+          variables: { login: config.username, cursor },
+        },
+        {
+          headers: {
+            Accept: "application/vnd.github+json",
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+            "User-Agent": "portfolio-kaiqui",
+          },
+          timeout: 15_000,
+        },
+      );
 
-    if (!response.ok) {
-      throw new Error(`GitHub GraphQL respondeu com ${response.status}`);
-    }
-
-    const payload: GraphqlPayload = await response.json();
+    const payload: GraphqlPayload = response.data;
     const repositories: GraphqlRepositories | undefined =
       payload.data?.user?.repositories;
 
@@ -177,7 +182,10 @@ export async function GET() {
       );
     }
 
-    const languageData = await fetchLanguageBytes(token);
+    const languageData = await requestLanguageBytes(
+      token,
+      getGithubConfig(),
+    );
 
     return NextResponse.json(languageData, {
       headers: {
