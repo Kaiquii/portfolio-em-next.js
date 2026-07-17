@@ -41,6 +41,7 @@ export default function LanguageChart() {
           "/api/github-languages",
           {
             signal: controller.signal,
+            timeout: 15_000,
           },
         );
 

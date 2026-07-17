@@ -117,6 +117,7 @@ export default function ContributionCalendar() {
           {
             params: selectedYear === null ? undefined : { year: selectedYear },
             signal: controller.signal,
+            timeout: 15_000,
           },
         );
 

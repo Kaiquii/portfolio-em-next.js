@@ -26,22 +26,27 @@ const formatDate = (date: string) =>
 export default function GithubSection() {
   const [repos, setRepos] = useState<GithubRepo[]>([]);
   const [loading, setLoading] = useState(true);
+  const [failed, setFailed] = useState(false);
   const [activeFilter, setActiveFilter] = useState<string>("Todos");
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   useEffect(() => {
+    const controller = new AbortController();
+
     const loadRepos = async () => {
       try {
-        const data = await getGithubRepos();
+        const data = await getGithubRepos(controller.signal);
         setRepos(data.filter((repo) => repo.name.toLowerCase() !== "kaiquii"));
-      } catch (error) {
-        console.error("Erro ao carregar repositórios", error);
+      } catch {
+        if (!controller.signal.aborted) setFailed(true);
       } finally {
-        setLoading(false);
+        if (!controller.signal.aborted) setLoading(false);
       }
     };
+
     loadRepos();
+    return () => controller.abort();
   }, []);
 
   const filterStats = useMemo(() => {
@@ -90,8 +95,6 @@ export default function GithubSection() {
     return result;
   }, [repos, activeFilter, searchQuery]);
 
-  if (!loading && repos.length === 0) return null;
-
   return (
     <section
       id="github-repos"
@@ -120,6 +123,21 @@ export default function GithubSection() {
             <Loader2 className="animate-spin text-pink-500 mb-4" size={40} />
             <p className="text-gray-500 dark:text-gray-400">
               Buscando no GitHub...
+            </p>
+          </div>
+        ) : failed ? (
+          <div className="rounded-lg border border-dashed border-black/15 bg-white/75 px-5 py-12 text-center shadow-sm dark:border-white/15 dark:bg-white/5">
+            <p className="text-base font-semibold text-gray-900 dark:text-white">
+              Não foi possível carregar os repositórios agora.
+            </p>
+            <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+              Tente atualizar a página em alguns instantes.
+            </p>
+          </div>
+        ) : repos.length === 0 ? (
+          <div className="rounded-lg border border-dashed border-black/15 bg-white/75 px-5 py-12 text-center shadow-sm dark:border-white/15 dark:bg-white/5">
+            <p className="text-base font-semibold text-gray-900 dark:text-white">
+              Nenhum repositório público encontrado.
             </p>
           </div>
         ) : (

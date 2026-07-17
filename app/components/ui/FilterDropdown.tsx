@@ -29,11 +29,14 @@ export default function FilterDropdown({
     filterStats.find((f) => f.name === activeFilter)?.count || 0;
 
   return (
-    <div className="relative z-[60] w-full md:w-1/2">
+    <div className="relative z-60 w-full md:w-1/2">
       <button
+        type="button"
         onClick={() => setIsOpen(!isOpen)}
         aria-expanded={isOpen}
-        className="w-full px-4 py-3 rounded-lg bg-white dark:bg-[#1a1a1a] border border-black/10 dark:border-white/10 text-gray-900 dark:text-white flex items-center justify-between hover:border-pink-500/50 shadow-sm focus:outline-none"
+        aria-haspopup="listbox"
+        aria-controls="repository-language-options"
+        className="w-full px-4 py-3 rounded-lg bg-white dark:bg-[#1a1a1a] border border-black/10 dark:border-white/10 text-gray-900 dark:text-white flex items-center justify-between hover:border-pink-500/50 shadow-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pink-500"
       >
         <div className="flex items-center gap-2">
           <span className="text-gray-500 dark:text-gray-400">Linguagem:</span>
@@ -51,20 +54,25 @@ export default function FilterDropdown({
       <AnimatePresence>
         {isOpen && (
           <motion.div
+            id="repository-language-options"
+            role="listbox"
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
-            className="absolute z-[70] mt-3 max-h-64 w-full overflow-y-auto rounded-lg border border-black/10 bg-white shadow-lg dark:border-white/10 dark:bg-[#1a1a1a]"
+            className="absolute z-70 mt-3 max-h-64 w-full overflow-y-auto rounded-lg border border-black/10 bg-white shadow-lg dark:border-white/10 dark:bg-[#1a1a1a]"
           >
             {filterStats.map((filter) => (
               <button
                 key={filter.name}
+                type="button"
+                role="option"
+                aria-selected={activeFilter === filter.name}
                 onClick={() => {
                   setActiveFilter(filter.name);
                   setIsOpen(false);
                 }}
-                className={`w-full px-4 py-3 flex items-center justify-between text-left ${
+                className={`w-full px-4 py-3 flex items-center justify-between text-left focus-visible:outline-2 focus-visible:outline-inset focus-visible:outline-pink-500 ${
                   activeFilter === filter.name
                     ? "bg-pink-50 dark:bg-pink-500/10 text-pink-600 dark:text-pink-400 font-bold border-l-4 border-pink-500"
                     : "text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-white/5 border-l-4 border-transparent"

@@ -7,27 +7,42 @@ import { Typewriter } from "react-simple-typewriter";
 import Tilt from "react-parallax-tilt";
 import {
   FaArrowRight,
+  FaCss3Alt,
   FaDownload,
   FaGithub,
+  FaHtml5,
   FaInstagram,
+  FaJava,
+  FaJs,
   FaLinkedin,
+  FaNodeJs,
+  FaPython,
+  FaReact,
   FaWhatsapp,
 } from "react-icons/fa";
+import {
+  SiGo,
+  SiKotlin,
+  SiNextdotjs,
+  SiSharp,
+  SiTailwindcss,
+  SiTypescript,
+} from "react-icons/si";
 
 const techs = [
-  { name: "HTML5", src: "https://skillicons.dev/icons?i=html" },
-  { name: "CSS3", src: "https://skillicons.dev/icons?i=css" },
-  { name: "JavaScript", src: "https://skillicons.dev/icons?i=js" },
-  { name: "TypeScript", src: "https://skillicons.dev/icons?i=ts" },
-  { name: "React", src: "https://skillicons.dev/icons?i=react" },
-  { name: "NextJS", src: "https://skillicons.dev/icons?i=nextjs" },
-  { name: "Tailwind", src: "https://skillicons.dev/icons?i=tailwind" },
-  { name: "NodeJS", src: "https://skillicons.dev/icons?i=nodejs" },
-  { name: "Java", src: "https://skillicons.dev/icons?i=java" },
-  { name: "Kotlin", src: "https://skillicons.dev/icons?i=kotlin" },
-  { name: "Go", src: "https://skillicons.dev/icons?i=go" },
-  { name: "C#", src: "https://skillicons.dev/icons?i=cs" },
-  { name: "Python", src: "https://skillicons.dev/icons?i=py" },
+  { name: "HTML5", icon: FaHtml5 },
+  { name: "CSS3", icon: FaCss3Alt },
+  { name: "JavaScript", icon: FaJs },
+  { name: "TypeScript", icon: SiTypescript },
+  { name: "React", icon: FaReact },
+  { name: "NextJS", icon: SiNextdotjs },
+  { name: "Tailwind", icon: SiTailwindcss },
+  { name: "NodeJS", icon: FaNodeJs },
+  { name: "Java", icon: FaJava },
+  { name: "Kotlin", icon: SiKotlin },
+  { name: "Go", icon: SiGo },
+  { name: "C#", icon: SiSharp },
+  { name: "Python", icon: FaPython },
 ];
 
 const socialLinks = [
@@ -150,26 +165,21 @@ export default function Hero() {
           </h3>
 
           <ul className="flex flex-wrap justify-center lg:justify-start gap-2.5 max-w-xl">
-            {techs.map((tech) => (
-              <li
-                key={tech.name}
-                title={tech.name}
-                className="group cursor-default"
-              >
-                <div className="flex items-center justify-center p-2.5 rounded-lg bg-white/85 dark:bg-white/5 border border-black/10 dark:border-white/10 shadow-sm dark:shadow-none backdrop-blur hover:-translate-y-0.5 hover:bg-black/5 dark:hover:bg-white/10 hover:border-pink-500/35 dark:hover:border-pink-500/35">
-                  <div className="relative w-9 h-9 lg:w-10 lg:h-10">
-                    <Image
-                      src={tech.src}
-                      alt={tech.name}
-                      fill
-                      sizes="(min-width: 1024px) 40px, 36px"
-                      className="object-contain drop-shadow-md"
-                      unoptimized={true}
-                    />
+            {techs.map((tech) => {
+              const Icon = tech.icon;
+
+              return (
+                <li
+                  key={tech.name}
+                  title={tech.name}
+                  className="group cursor-default"
+                >
+                  <div className="flex h-14 w-14 items-center justify-center rounded-lg border border-black/10 bg-white/85 p-2.5 text-3xl text-gray-800 shadow-sm backdrop-blur hover:-translate-y-0.5 hover:border-pink-500/35 hover:bg-black/5 dark:border-white/10 dark:bg-white/5 dark:text-white dark:shadow-none dark:hover:bg-white/10 dark:hover:border-pink-500/35 lg:h-15 lg:w-15 lg:text-[2rem]">
+                    <Icon aria-label={tech.name} />
                   </div>
-                </div>
-              </li>
-            ))}
+                </li>
+              );
+            })}
           </ul>
         </motion.div>
       </div>
