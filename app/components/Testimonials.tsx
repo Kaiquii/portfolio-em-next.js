@@ -19,14 +19,6 @@ const recommendations = [
     featured: false,
   },
   {
-    name: "João Mário Silva Nascimento",
-    role: "Engenheiro de Software | Go | Kotlin | NodeJs | NextJs",
-    company: "D&O Sistemas",
-    img: "/img/joao-mario.webp",
-    text: "Quero deixar aqui minha recomendação pro Kaiqui Lucas. Tive a oportunidade de acompanhar o trabalho dele e posso dizer com tranquilidade que é um profissional com muita disposição pra aprender e que entrega os projetos com excelência e atenção aos detalhes. É o tipo de pessoa que não se contenta em fazer o básico, ele realmente busca entender o porquê das coisas, se aprofunda, melhora a cada dia e tem uma postura super proativa. Sem dúvida, alguém com muito potencial e que faz a diferença em qualquer equipe. Além disso, ele tem uma mentalidade colaborativa incrível. Sempre disposto a ajudar os colegas, compartilhar conhecimento e contribuir pra que o time cresça junto. Trabalhar com alguém assim é fácil, leve e inspirador, e isso faz toda a diferença no dia a dia.",
-    featured: false,
-  },
-  {
     name: "Leonardo Cali ",
     role: "Analista de Sistemas | Analista de Infraestrutura | Virtualização de Ambientes",
     company: "D&O Sistemas",
